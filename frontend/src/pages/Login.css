@@ -1,0 +1,655 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap');
+
+/* Reset Box Model untuk Login */
+.login-wrapper * {
+  box-sizing: border-box;
+}
+
+.login-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #2b1d16;
+  background-color: #faf7f2;
+}
+
+/* =========================================
+   KOLOM KIRI: HERO BANNER & STATISTIK PRAMUKA
+   ========================================= */
+.login-hero-panel {
+  position: relative;
+  flex: 1.15;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Overlay gradient cokelat hangat & redup agar teks terbaca jelas */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 17, 12, 0.76) 0%,
+    rgba(38, 24, 17, 0.8) 50%,
+    rgba(20, 12, 8, 0.92) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 3rem 3.5rem;
+  color: #ffffff;
+}
+
+/* Top bar: Badge Kwarcab & Tahun Bakti */
+.hero-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.badge-kwarcab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #eab308;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(234, 179, 8, 0.8);
+}
+
+.bakti-period {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.3px;
+}
+
+/* Center content: Program Badge, Headline, Description, Stat Card */
+.hero-center-content {
+  margin: auto 0;
+  max-width: 540px;
+}
+
+.badge-program {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  background: rgba(146, 64, 14, 0.85);
+  border: 1px solid rgba(217, 119, 6, 0.6);
+  color: #fde68a;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-title {
+  font-size: 3.25rem;
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.25rem 0;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-title-highlight {
+  color: #F2A900;
+  
+}
+
+.hero-line {
+  width: 60px;
+  height: 3px;
+  background-color: #F2A900;
+  border-radius: 2px;
+  margin: 1rem 0 1.25rem 0;
+}
+
+.hero-tagline,
+.hero-description {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 2.25rem;
+  font-weight: 400;
+  text-align: justify;
+}
+
+/* Stat Card Glassmorphism */
+.stat-glass-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.6rem;
+  background: rgba(45, 28, 18, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+  width: fit-content;
+}
+
+.stat-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+  flex-shrink: 0;
+}
+
+.stat-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+/* Footer Panel Kiri */
+.hero-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+}
+
+/* =========================================
+   KOLOM KANAN: LOGIN CARD PANEL
+   ========================================= */
+.login-form-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+  background-color: #faf7f2;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 2.75rem 2.25rem 2.25rem;
+  box-shadow:
+    0 10px 25px -5px rgba(43, 29, 22, 0.05),
+    0 20px 48px -8px rgba(43, 29, 22, 0.08);
+  border: 1px solid #ede7df;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo Tunas Kelapa Scout Emblem */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.logo-badge {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(145deg, #38251c 0%, #22150f 100%);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(43, 29, 22, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.logo-badge:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Header Text */
+.card-header-text {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.brand-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #2b1d16;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: -0.02em;
+}
+
+.brand-tagline {
+  font-size: 0.88rem;
+  color: #b45309;
+  font-style: italic;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+}
+
+.badge-subtitle {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  background: #fbf5ee;
+  border: 1px solid #ebd9c8;
+  color: #854d0e;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Alerts */
+.alert-box {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.alert-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.alert-success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+/* Form Styles */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #524137;
+  text-transform: uppercase;
+}
+
+/* Custom Select */
+.select-container {
+  position: relative;
+}
+
+.form-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #ffffff;
+  border: 1.5px solid #e5ded5;
+  border-radius: 12px;
+  padding: 0.8rem 2.5rem 0.8rem 1rem;
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: #2b1d16;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-select:focus {
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #8c7a6e;
+}
+
+/* Password Input */
+.label-with-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #b45309;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1.5px solid #e5ded5;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: #2b1d16;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-input::placeholder {
+  color: #a89c92;
+  font-weight: 400;
+}
+
+.form-input:focus {
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+}
+
+.icon-toggle-btn {
+  position: absolute;
+  right: 0.85rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8c7a6e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+}
+
+.icon-toggle-btn:hover {
+  color: #2b1d16;
+}
+
+/* Captcha verification section */
+.captcha-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.captcha-display {
+  position: relative;
+  background: linear-gradient(135deg, #dcfce7 0%, #ecfdf5 50%, #fef3c7 100%);
+  border: 1.5px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 0.65rem 1rem;
+  min-width: 120px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+.captcha-code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: #047857;
+  text-decoration: line-through;
+  text-decoration-color: rgba(4, 120, 87, 0.45);
+  font-style: italic;
+  transform: skewX(-6deg);
+}
+
+.captcha-noise-line {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  top: 45%;
+  height: 1.5px;
+  background: rgba(16, 185, 129, 0.5);
+  transform: rotate(-8deg);
+}
+
+.captcha-noise-line-2 {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  top: 60%;
+  height: 1px;
+  background: rgba(245, 158, 11, 0.4);
+  transform: rotate(5deg);
+}
+
+.captcha-refresh-btn {
+  background: #ffffff;
+  border: 1.5px solid #e5ded5;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b5c52;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.captcha-refresh-btn:hover {
+  background: #f7f3ed;
+  color: #2b1d16;
+  border-color: #d97706;
+}
+
+.captcha-refresh-btn:active svg {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+.captcha-input {
+  flex: 1;
+}
+
+/* Action Buttons */
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: #38251c;
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 0.95rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 14px rgba(56, 37, 28, 0.25);
+  font-family: inherit;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #231610;
+  box-shadow: 0 6px 18px rgba(56, 37, 28, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-public-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: #ffffff;
+  color: #38251c;
+  border: 1.5px solid #38251c;
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-public-map:hover {
+  background: #fbf5ee;
+  border-color: #231610;
+}
+
+/* Card Footer */
+.card-footer-info {
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.help-text {
+  font-size: 0.78rem;
+  color: #6d5d52;
+  margin: 0;
+}
+
+.kwarcab-contact-link {
+  color: #2b1d16;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.kwarcab-contact-link:hover {
+  text-decoration: underline;
+  color: #b45309;
+}
+
+.copyright-text {
+  font-size: 0.68rem;
+  color: #a89c92;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================= */
+@media (max-width: 1024px) {
+  .login-hero-panel {
+    display: none; /* Pada tablet/ponsel sempit fokuskan ke card login */
+  }
+
+  .login-form-panel {
+    flex: 1;
+    padding: 1.5rem;
+    min-height: 100vh;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .login-hero-panel {
+    display: flex;
+    flex: none;
+    min-height: 380px;
+  }
+
+  .hero-content {
+    padding: 2rem;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+}
