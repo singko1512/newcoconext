@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import bgImage from '../assets/login_bg.jpg';
 import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
 
 export default function Login({ onNavigateToHome }) {
   const { login } = useAuth();
@@ -12,8 +13,22 @@ export default function Login({ onNavigateToHome }) {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [userList, setUserList] = useState([]);
 
-  const handleSubmit = (e) => {
+  // Muat daftar akun kwarran & kwarcab langsung dari database MySQL
+  useEffect(() => {
+    api.get('/auth/users')
+      .then((res) => {
+        if (res && res.success && Array.isArray(res.data)) {
+          setUserList(res.data);
+        }
+      })
+      .catch((err) => {
+        console.warn('Backend API belum terhubung atau offline:', err);
+      });
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
     setSuccessMessage('');
@@ -30,21 +45,48 @@ export default function Login({ onNavigateToHome }) {
 
     setLoading(true);
 
-    // Simulasi proses login (bisa dikoneksikan ke backend API)
-    setTimeout(() => {
-      setLoading(false);
-      login(
-        {
-          name: identity,
-          role: identity.includes('Kwarcab') ? 'admin' : 'pangkalan',
-        },
-        'dummy-auth-token-coconext-2024'
-      );
-      setSuccessMessage('Berhasil masuk! Mengalihkan ke dashboard...');
-      if (onNavigateToHome) {
-        setTimeout(() => onNavigateToHome(), 800);
+    try {
+      // 1. Coba login ke Backend Express API
+      const res = await api.post('/auth/login', {
+        identity,
+        password,
+      });
+
+      if (res && res.success) {
+        setLoading(false);
+        login(res.user, res.token);
+        setSuccessMessage('Berhasil masuk! Mengalihkan ke dashboard...');
+        if (onNavigateToHome) {
+          setTimeout(() => onNavigateToHome(), 600);
+        }
+        return;
       }
-    }, 900);
+    } catch (err) {
+      console.warn('API login error, mencoba fallback / pesan:', err.message);
+      
+      // Jika backend merespon kata sandi salah / user tidak ditemukan
+      if (err.status === 401 || err.status === 400) {
+        setLoading(false);
+        setErrorMessage(err.message || 'Identitas atau kata sandi tidak cocok.');
+        return;
+      }
+
+      // Fallback simulasi jika backend sedang tidak aktif
+      setTimeout(() => {
+        setLoading(false);
+        login(
+          {
+            name: identity,
+            role: identity.toLowerCase().includes('kwarcab') ? 'admin' : 'pangkalan',
+          },
+          'dummy-auth-token-coconext-2024'
+        );
+        setSuccessMessage('Berhasil masuk (Mode Offline)! Mengalihkan...');
+        if (onNavigateToHome) {
+          setTimeout(() => onNavigateToHome(), 600);
+        }
+      }, 700);
+    }
   };
 
   return (
@@ -130,34 +172,48 @@ export default function Login({ onNavigateToHome }) {
                   onChange={(e) => setIdentity(e.target.value)}
                 >
                   <option value="">-- PILIH IDENTITAS / PANGKALAN --</option>
-                  <optgroup label="Pengurus Kwartir">
-                    <option value="Admin Kwarcab Kabupaten Bogor">
-                      Admin Kwarcab Kabupaten Bogor
-                    </option>
-                    <option value="Pimpinan Saka Wanabakti Bogor">
-                      Pimpinan Saka Wanabakti Kab. Bogor
-                    </option>
-                    <option value="Pimpinan Saka Tarunabumi Bogor">
-                      Pimpinan Saka Tarunabumi Kab. Bogor
-                    </option>
-                  </optgroup>
-                  <optgroup label="Kwartir Ranting / Gugus Depan">
-                    <option value="Kwarran Cibinong - Gudep 01.001">
-                      Kwarran Cibinong - Gudep 01.001
-                    </option>
-                    <option value="Kwarran Ciawi - Gudep 03.015">
-                      Kwarran Ciawi - Gudep 03.015
-                    </option>
-                    <option value="Kwarran Babakan Madang - Gudep 05.022">
-                      Kwarran Babakan Madang - Gudep 05.022
-                    </option>
-                    <option value="Kwarran Sukaraja - Gudep 02.008">
-                      Kwarran Sukaraja - Gudep 02.008
-                    </option>
-                    <option value="Kwarran Cileungsi - Gudep 09.041">
-                      Kwarran Cileungsi - Gudep 09.041
-                    </option>
-                  </optgroup>
+                  {userList.length > 0 ? (
+                    <>
+                      <optgroup label="Akun Database Kwarcab & Kwarran">
+                        {userList.map((u) => (
+                          <option key={u.id} value={u.username}>
+                            {u.fullname} ({u.username})
+                          </option>
+                        ))}
+                      </optgroup>
+                    </>
+                  ) : (
+                    <>
+                      <optgroup label="Pengurus Kwartir">
+                        <option value="Admin Kwarcab Kabupaten Bogor">
+                          Admin Kwarcab Kabupaten Bogor
+                        </option>
+                        <option value="Pimpinan Saka Wanabakti Bogor">
+                          Pimpinan Saka Wanabakti Kab. Bogor
+                        </option>
+                        <option value="Pimpinan Saka Tarunabumi Bogor">
+                          Pimpinan Saka Tarunabumi Kab. Bogor
+                        </option>
+                      </optgroup>
+                      <optgroup label="Kwartir Ranting / Gugus Depan">
+                        <option value="Kwarran Cibinong - Gudep 01.001">
+                          Kwarran Cibinong - Gudep 01.001
+                        </option>
+                        <option value="Kwarran Ciawi - Gudep 03.015">
+                          Kwarran Ciawi - Gudep 03.015
+                        </option>
+                        <option value="Kwarran Babakan Madang - Gudep 05.022">
+                          Kwarran Babakan Madang - Gudep 05.022
+                        </option>
+                        <option value="Kwarran Sukaraja - Gudep 02.008">
+                          Kwarran Sukaraja - Gudep 02.008
+                        </option>
+                        <option value="Kwarran Cileungsi - Gudep 09.041">
+                          Kwarran Cileungsi - Gudep 09.041
+                        </option>
+                      </optgroup>
+                    </>
+                  )}
                 </select>
                 <div className="select-arrow">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
