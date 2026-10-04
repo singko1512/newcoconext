@@ -57,7 +57,7 @@ export default function AddTreeModal({ isOpen, onClose, onTreeAdded, defaultPlan
         asal_bibit: asalBibit,
         penanam: penanam || defaultPlanter || 'Kwarcab Bogor',
         cerita,
-        status: 'alive',
+        status: '',
       };
 
       const res = await api.post('/trees', payload);

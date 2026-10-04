@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Rank from './pages/Rank';
 import Statistics from './pages/Statistics';
+import logoImg from './assets/logo.jpg';
 
 function MainApp() {
   const { user, logout } = useAuth();
@@ -26,14 +27,17 @@ function MainApp() {
       {/* Top Header Navbar */}
       <header
         style={{
-          padding: '0.75rem 1.75rem',
-          background: 'linear-gradient(90deg, #2b1d16 0%, #3a281e 100%)',
-          color: '#ffffff',
+          padding: '0.65rem 1.75rem',
+          background: '#ffffff',
+          color: '#1f2937',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
+          boxShadow: '0 1px 4px rgba(0, 0, 0, 0.06)',
+          borderBottom: '1px solid #e5e7eb',
           zIndex: 1010,
+          position: 'sticky',
+          top: 0,
         }}
       >
         {/* Brand & Logo */}
@@ -41,25 +45,16 @@ function MainApp() {
           style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}
           onClick={() => setCurrentPage('home')}
         >
-          <div
-            style={{
-              width: '36px',
-              height: '36px',
-              background: '#f59e0b',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.25rem',
-            }}
-          >
-            🌱
-          </div>
+          <img
+            src={logoImg}
+            alt="Logo Kwarcab Bogor"
+            style={{ width: '38px', height: '38px', objectFit: 'contain' }}
+          />
           <div>
-            <div style={{ fontWeight: 900, fontSize: '1.1rem', letterSpacing: '0.4px', color: '#ffffff' }}>
+            <div style={{ fontWeight: 900, fontSize: '1.05rem', letterSpacing: '0.5px', color: '#1f2937' }}>
               COCONEXT
             </div>
-            <div style={{ fontSize: '0.72rem', color: '#fde68a', fontWeight: 600 }}>
+            <div style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 700, letterSpacing: '0.3px' }}>
               KWARCAB BOGOR
             </div>
           </div>
@@ -75,7 +70,7 @@ function MainApp() {
               ...(currentPage === 'home' ? activeNavBtnStyle : {}),
             }}
           >
-            🗺️ Peta Sebaran
+            Peta
           </button>
 
           <button
@@ -86,7 +81,7 @@ function MainApp() {
               ...(currentPage === 'rank' ? activeNavBtnStyle : {}),
             }}
           >
-            🏆 Peringkat Penanam
+            Peringkat Penanam
           </button>
 
           <button
@@ -97,18 +92,18 @@ function MainApp() {
               ...(currentPage === 'statistics' ? activeNavBtnStyle : {}),
             }}
           >
-            📊 Statistik Tanaman
+            Statistik Tanaman
           </button>
         </nav>
 
         {/* User Info & Login / Logout */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-            <span style={{ fontSize: '0.85rem', color: '#ffffff', fontWeight: 700 }}>
-              {user ? user.name || user.username : 'Mode Tamu'}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.25 }}>
+            <span style={{ fontSize: '0.85rem', color: '#1f2937', fontWeight: 700 }}>
+              {user ? user.name || user.username : ''}
             </span>
-            <span style={{ fontSize: '0.72rem', color: '#fde68a' }}>
-              {user ? (user.role === 'admin' ? '🛡️ Administrator' : '🏢 Kwarran/Pangkalan') : '👀 Peninjau'}
+            <span style={{ fontSize: '0.72rem', color: '#6b7280', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+              {user ? (user.role === 'admin' ? '🛡️ Administrator' : '🏢 Kwarran/Pangkalan') : ''}
             </span>
           </div>
 
@@ -119,21 +114,22 @@ function MainApp() {
               setCurrentPage('login');
             }}
             style={{
-              background: user ? '#ef4444' : '#f59e0b',
-              color: user ? '#ffffff' : '#2b1d16',
+              background: user ? '#ef4444' : '#CC6F00',
+              color: '#ffffff',
               border: 'none',
-              padding: '0.45rem 0.9rem',
+              padding: '0.45rem 1rem',
               borderRadius: '8px',
               cursor: 'pointer',
-              fontSize: '0.8rem',
-              fontWeight: 800,
+              fontSize: '0.82rem',
+              fontWeight: 700,
               display: 'flex',
               alignItems: 'center',
               gap: '0.35rem',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+              boxShadow: user ? '0 2px 6px rgba(239, 68, 68, 0.25)' : '0 2px 6px rgba(204, 111, 0, 0.25)',
+              transition: 'all 0.15s ease',
             }}
           >
-            {user ? 'Keluar' : 'Masuk / Login'}
+            {user ? 'Keluar' : 'Masuk'}
           </button>
         </div>
       </header>
@@ -158,20 +154,24 @@ function MainApp() {
 
 const navBtnStyle = {
   background: 'transparent',
-  color: '#e5e7eb',
+  color: '#374151',
   border: 'none',
-  padding: '0.5rem 0.95rem',
+  padding: '0.45rem 0.95rem',
   borderRadius: '8px',
   cursor: 'pointer',
-  fontSize: '0.88rem',
-  fontWeight: 700,
+  fontSize: '0.85rem',
+  fontWeight: 600,
   transition: 'all 0.15s ease',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.35rem',
 };
 
 const activeNavBtnStyle = {
-  background: '#f59e0b',
-  color: '#2b1d16',
-  boxShadow: '0 2px 8px rgba(245, 158, 11, 0.35)',
+  background: '#CC6F00',
+  color: '#ffffff',
+  fontWeight: 700,
+  boxShadow: '0 2px 6px rgba(204, 111, 0, 0.25)',
 };
 
 export default function App() {

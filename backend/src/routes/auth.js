@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import pool from '../config/db.js';
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'coconext_jwt_secret_key_2026';
+const JWT_SECRET = process.env.JWT_SECRET || '  _jwt_secret_key_2026';
 
 /**
  * GET /api/auth/users
@@ -107,6 +107,101 @@ router.post('/login', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Terjadi kesalahan pada server saat login',
+      error: error.message,
+    });
+  }
+});
+
+/**
+ * POST /api/auth/register
+ * Pendaftaran akun baru untuk penanam pohon / kwarran
+ */
+router.post('/register', async (req, res) => {
+  const { username, fullname, password, org, whatsapp, birthdate } = req.body;
+
+  if (!username || !password || !fullname) {
+    return res.status(400).json({
+      success: false,
+      message: 'Nama lengkap, username, dan kata sandi wajib diisi',
+    });
+  }
+
+  // Format username (lowercase, tanpa spasi)
+  const cleanUsername = username.trim().toLowerCase().replace(/\s+/g, '_');
+
+  if (cleanUsername.length < 3) {
+    return res.status(400).json({
+      success: false,
+      message: 'Username minimal harus 3 karakter',
+    });
+  }
+
+  if (password.length < 4) {
+    return res.status(400).json({
+      success: false,
+      message: 'Kata sandi minimal harus 4 karakter',
+    });
+  }
+
+  try {
+    // Periksa apakah username sudah terdaftar
+    const [existing] = await pool.query(
+      'SELECT id FROM users WHERE username = ? LIMIT 1',
+      [cleanUsername]
+    );
+
+    if (existing.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Username sudah digunakan, silakan pilih username lain',
+      });
+    }
+
+    // Hash password menggunakan bcrypt
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    const defaultBirthdate = birthdate || '2005-01-01';
+    const defaultWhatsapp = whatsapp ? String(whatsapp).trim() : '-';
+    const defaultOrg = org ? String(org).trim() : 'Penanam Mandiri / Komunitas';
+
+    const [result] = await pool.query(
+      `INSERT INTO users (username, password_hash, fullname, org, birthdate, whatsapp, is_admin)
+       VALUES (?, ?, ?, ?, ?, ?, 0)`,
+      [cleanUsername, passwordHash, fullname.trim(), defaultOrg, defaultBirthdate, defaultWhatsapp]
+    );
+
+    // Buat JWT Token agar bisa langsung otomatis login
+    const token = jwt.sign(
+      {
+        id: result.insertId,
+        username: cleanUsername,
+        fullname: fullname.trim(),
+        org: defaultOrg,
+        is_admin: false,
+      },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.status(201).json({
+      success: true,
+      message: 'Pendaftaran akun penanam berhasil!',
+      token,
+      user: {
+        id: result.insertId,
+        username: cleanUsername,
+        name: fullname.trim(),
+        fullname: fullname.trim(),
+        org: defaultOrg,
+        is_admin: false,
+        role: 'pangkalan',
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Gagal mendaftarkan akun baru',
       error: error.message,
     });
   }
