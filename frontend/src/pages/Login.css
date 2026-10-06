@@ -677,7 +677,7 @@
   justify-content: center;
   gap: 0.6rem;
   width: 100%;
-  background: #CC6F00;
+  background: #92400e;
   color: #ffffff;
   border: none;
   border-radius: 14px;
@@ -688,13 +688,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: 0.5rem;
-  box-shadow: 0 4px 14px rgba(204, 111, 0, 0.25);
+  box-shadow: 0 4px 14px rgba(146, 64, 14, 0.25);
   font-family: inherit;
 }
 
 .btn-submit:hover:not(:disabled) {
-  background: #b35f00;
-  box-shadow: 0 6px 18px rgba(204, 111, 0, 0.35);
+  background: #78350f;
+  box-shadow: 0 6px 18px rgba(146, 64, 14, 0.35);
   transform: translateY(-1px);
 }
 
@@ -714,8 +714,8 @@
   gap: 0.6rem;
   width: 100%;
   background: #ffffff;
-  color: #CC6F00;
-  border: 1.5px solid #CC6F00;
+  color: #92400e;
+  border: 1.5px solid #92400e;
   border-radius: 14px;
   padding: 0.85rem 1rem;
   font-size: 0.82rem;
@@ -727,8 +727,9 @@
 }
 
 .btn-public-map:hover {
-  background: #fbf5ee;
-  border-color: #b35f00;
+  background: #fef3c7;
+  border-color: #92400e;
+  color: #78350f;
 }
 
 /* Card Footer */

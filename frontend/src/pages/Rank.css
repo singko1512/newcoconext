@@ -193,7 +193,7 @@
 }
 
 .podium-btn {
-  background: #CC6F00;
+  background: #92400e;
   color: #ffffff;
   border: none;
   padding: 0.42rem 1rem;
@@ -202,13 +202,13 @@
   font-weight: 700;
   font-size: 0.78rem;
   transition: all 0.15s ease;
-  box-shadow: 0 2px 6px rgba(204, 111, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(146, 64, 14, 0.25);
 }
 
 .podium-btn:hover {
-  background: #b35f00;
+  background: #78350f;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(204, 111, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(146, 64, 14, 0.3);
 }
 
 /* ─── CONTROLS ROW ─── */
@@ -291,10 +291,10 @@
 }
 
 .filter-chip.active {
-  background: #CC6F00;
+  background: #92400e;
   color: #ffffff;
-  border-color: #CC6F00;
-  box-shadow: 0 2px 6px rgba(204, 111, 0, 0.25);
+  border-color: #92400e;
+  box-shadow: 0 2px 6px rgba(146, 64, 14, 0.25);
 }
 
 /* Summary badge */
@@ -492,23 +492,23 @@
 
 /* Action button */
 .table-action-btn {
-  background: #f8fafc;
-  color: #475569;
-  border: 1px solid #e2e8f0;
-  padding: 0.32rem 0.7rem;
-  border-radius: 6px;
+  background: #92400e;
+  color: #ffffff;
+  border: none;
+  padding: 0.32rem 0.75rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 700;
   transition: all 0.15s ease;
   white-space: nowrap;
 }
 
 .table-action-btn:hover {
-  background: #CC6F00;
+  background: #78350f;
   color: #ffffff;
-  border-color: #CC6F00;
-  box-shadow: 0 2px 6px rgba(204, 111, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(146, 64, 14, 0.25);
+  transform: translateY(-1px);
 }
 
 /* ─── LOADING & EMPTY ─── */

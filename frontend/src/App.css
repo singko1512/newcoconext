@@ -80,12 +80,12 @@
   bottom: 4px;
   left: 0;
   border-radius: 8px;
-  background: #CC6F00;
+  background: #92400e;
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
               width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 0;
   pointer-events: none;
-  box-shadow: 0 2px 6px rgba(204, 111, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(146, 64, 14, 0.25);
 }
 
 .navbar-nav-btn {
@@ -149,14 +149,14 @@
 }
 
 .navbar-auth-btn.login {
-  background: #CC6F00;
+  background: #92400e;
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(204, 111, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(146, 64, 14, 0.25);
 }
 
 .navbar-auth-btn.login:hover {
-  background: #b56200;
-  box-shadow: 0 4px 12px rgba(204, 111, 0, 0.3);
+  background: #78350f;
+  box-shadow: 0 4px 12px rgba(146, 64, 14, 0.3);
 }
 
 .navbar-auth-btn.logout {

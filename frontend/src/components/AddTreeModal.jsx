@@ -244,13 +244,14 @@ export default function AddTreeModal({ isOpen, onClose, onTreeAdded, defaultPlan
               disabled={loading}
               style={{
                 padding: '0.65rem 1.5rem',
-                background: '#f59e0b',
+                background: '#92400e',
                 border: 'none',
                 borderRadius: '8px',
-                color: '#2b1d16',
+                color: '#ffffff',
                 fontWeight: 800,
                 cursor: loading ? 'not-allowed' : 'pointer',
-                boxShadow: '0 2px 6px rgba(245, 158, 11, 0.4)',
+                boxShadow: '0 2px 6px rgba(146, 64, 14, 0.35)',
+                transition: 'all 0.2s ease',
               }}
             >
               {loading ? 'Menyimpan...' : '🌱 Simpan ke Database'}

@@ -69,8 +69,9 @@ export default function Statistics({ onSelectSpecies }) {
   return (
     <div className="stats-container animate-fade-in">
       {/* Header */}
+      <br />
+      <br />
       <div className="stats-header">
-        <div className="stats-badge">PRAMUKA PENGABDIAN</div>
         <h1 className="stats-title">Statistik Varietas Tanaman</h1>
         <p className="stats-subtitle">
           Distribusi seluruh varietas kelapa dan tanaman produktif yang ditanam dalam aksi penghijauan Coconext di 40 Kecamatan Kabupaten Bogor.
@@ -112,25 +113,8 @@ export default function Statistics({ onSelectSpecies }) {
             <p>Perbandingan kuantitas per varietas berdasarkan jumlah penanaman.</p>
           </div>
 
-          <div className="display-limit-picker">
-            <span className="picker-label">Tampilkan:</span>
-            {[10, 15, 'ALL'].map((val) => (
-              <button
-                key={val}
-                type="button"
-                className={`limit-btn ${displayCount === val ? 'active' : ''}`}
-                onClick={() => setDisplayCount(val)}
-              >
-                {val === 'ALL' ? 'Semua' : `Top ${val}`}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Filter controls */}
-        <div className="chart-controls">
           <div className="chart-search-box">
-            <span className="search-icon">&#9906;</span>
+
             <input
               type="text"
               placeholder="Cari varietas..."
@@ -147,30 +131,6 @@ export default function Statistics({ onSelectSpecies }) {
                 &times;
               </button>
             )}
-          </div>
-
-          <div className="category-filter-buttons">
-            <button
-              type="button"
-              className={`cat-btn ${categoryFilter === 'ALL' ? 'active' : ''}`}
-              onClick={() => setCategoryFilter('ALL')}
-            >
-              Semua ({speciesList.length})
-            </button>
-            <button
-              type="button"
-              className={`cat-btn ${categoryFilter === 'KELAPA' ? 'active' : ''}`}
-              onClick={() => setCategoryFilter('KELAPA')}
-            >
-              Kelapa ({speciesList.filter((s) => (s.nama_lokal || '').toLowerCase().includes('kelapa')).length})
-            </button>
-            <button
-              type="button"
-              className={`cat-btn ${categoryFilter === 'OTHERS' ? 'active' : ''}`}
-              onClick={() => setCategoryFilter('OTHERS')}
-            >
-              Lainnya ({speciesList.filter((s) => !(s.nama_lokal || '').toLowerCase().includes('kelapa')).length})
-            </button>
           </div>
         </div>
 

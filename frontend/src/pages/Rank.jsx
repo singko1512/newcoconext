@@ -60,14 +60,16 @@ export default function Rank({ onSelectKecamatan }) {
   return (
     <div className="rank-container">
       {/* Header */}
+      <br />
+      <br />
       <div className="rank-header">
-        <div className="rank-badge">LEADERBOARD KWARCAB BOGOR</div>
         <h1 className="rank-title">Peringkat Penanaman Pohon</h1>
         <p className="rank-subtitle">
           Data capaian penanaman pohon oleh seluruh Kwartir Ranting se-Kabupaten Bogor
           dengan rekapitulasi pertahun 2025–2030 serta catatan penanaman terakhir.
         </p>
       </div>
+      <br />
 
       {/* Podium Top 3 */}
       {!loading && top3.length >= 3 && (
@@ -151,7 +153,6 @@ export default function Rank({ onSelectKecamatan }) {
       <div className="rank-controls">
         <div className="rank-controls-left">
           <div className="rank-search-box">
-            <span className="search-icon">&#9906;</span>
             <input
               type="text"
               placeholder="Cari Kwarran / Kecamatan..."
@@ -167,13 +168,6 @@ export default function Rank({ onSelectKecamatan }) {
               onClick={() => setFilterActiveOnly(false)}
             >
               Semua Kwarran ({ranks.length})
-            </button>
-            <button
-              type="button"
-              className={`filter-chip ${filterActiveOnly ? 'active' : ''}`}
-              onClick={() => setFilterActiveOnly(true)}
-            >
-              Ada Tanaman ({activeKwarranCount})
             </button>
           </div>
         </div>

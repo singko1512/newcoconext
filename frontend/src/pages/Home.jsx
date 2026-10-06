@@ -105,11 +105,11 @@ export default function Home({ selectedKecamatanFromRank, user }) {
       .then((geojson) => {
         const kabLayer = L.geoJSON(geojson, {
           style: {
-            color: '#b45309',
-            weight: 3,
+            color: '#78350f',
+            weight: 3.5,
             dashArray: '5, 5',
-            opacity: 0.9,
-            fillColor: '#f59e0b',
+            opacity: 1,
+            fillColor: '#92400e',
             fillOpacity: 0.03,
           },
         }).addTo(map);
@@ -199,10 +199,10 @@ export default function Home({ selectedKecamatanFromRank, user }) {
         const hasTrees = item && item.treeCount > 0;
 
         return {
-          color: hasTrees ? '#CC6F00' : '#94a3b8',
-          weight: hasTrees ? 1.5 : 1,
-          opacity: 0.8,
-          fillColor: hasTrees ? '#f59e0b' : '#64748b',
+          color: '#92400e',
+          weight: hasTrees ? 2.5 : 1.5,
+          opacity: 1,
+          fillColor: hasTrees ? '#92400e' : '#78350f',
           fillOpacity: hasTrees ? 0.08 : 0.02,
         };
       },
@@ -218,10 +218,10 @@ export default function Home({ selectedKecamatanFromRank, user }) {
 
         layer.on('mouseover', () => {
           layer.setStyle({
-            weight: 3,
-            color: '#b45309',
+            weight: 3.5,
+            color: '#78350f',
             fillOpacity: 0.25,
-            fillColor: '#f59e0b',
+            fillColor: '#92400e',
           });
         });
 
@@ -412,15 +412,16 @@ export default function Home({ selectedKecamatanFromRank, user }) {
         const name = layer.feature?.properties?.NKEC?.toUpperCase();
         if (name === kecItem.name) {
           layer.setStyle({
-            weight: 3,
-            color: '#b45309',
-            fillColor: '#f59e0b',
-            fillOpacity: 0.15,
+            weight: 4,
+            color: '#78350f',
+            fillColor: '#92400e',
+            fillOpacity: 0.2,
           });
         } else {
           layer.setStyle({
-            weight: 1,
-            color: '#cbd5e1',
+            weight: 1.2,
+            color: '#d97706',
+            opacity: 0.45,
             fillOpacity: 0.02,
           });
         }
@@ -453,10 +454,10 @@ export default function Home({ selectedKecamatanFromRank, user }) {
         const item = kecamatanDataList.find((k) => k.name === name);
         const hasTrees = item && item.treeCount > 0;
         layer.setStyle({
-          color: hasTrees ? '#CC6F00' : '#94a3b8',
-          weight: hasTrees ? 1.5 : 1,
-          opacity: 0.8,
-          fillColor: hasTrees ? '#f59e0b' : '#64748b',
+          color: '#92400e',
+          weight: hasTrees ? 2.5 : 1.5,
+          opacity: 1,
+          fillColor: hasTrees ? '#92400e' : '#78350f',
           fillOpacity: hasTrees ? 0.08 : 0.02,
         });
       });

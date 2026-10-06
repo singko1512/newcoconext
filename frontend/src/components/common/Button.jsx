@@ -12,7 +12,7 @@ export default function Button({ children, onClick, type = 'button', variant = '
 
   const variants = {
     primary: {
-      backgroundColor: '#3b82f6',
+      backgroundColor: '#92400e',
       color: '#ffffff',
     },
     secondary: {
