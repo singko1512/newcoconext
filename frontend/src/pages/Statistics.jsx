@@ -67,7 +67,7 @@ export default function Statistics({ onSelectSpecies }) {
       : 70;
 
   return (
-    <div className="stats-container">
+    <div className="stats-container animate-fade-in">
       {/* Header */}
       <div className="stats-header">
         <div className="stats-badge">PRAMUKA PENGABDIAN</div>
@@ -77,38 +77,30 @@ export default function Statistics({ onSelectSpecies }) {
         </p>
       </div>
 
-      {/* Metrics */}
+      {/* Clean Metrics Grid */}
       <div className="metrics-grid">
-        <div className="metric-card metric-primary">
-          <div className="metric-dot"></div>
-          <div className="metric-info">
-            <span className="metric-number">{stats?.total_trees || 211}</span>
-            <span className="metric-label">Total Pohon Ditanam</span>
-          </div>
+        <div className="metric-card">
+          <span className="metric-label">Total Pohon Ditanam</span>
+          <span className="metric-number">{stats?.total_trees || 211}</span>
+          <span className="metric-subtext">Tersebar di 40 Kecamatan</span>
         </div>
 
-        <div className="metric-card metric-amber">
-          <div className="metric-dot"></div>
-          <div className="metric-info">
-            <span className="metric-number">{speciesList.length || 35}</span>
-            <span className="metric-label">Ragam Varietas</span>
-          </div>
+        <div className="metric-card">
+          <span className="metric-label">Ragam Varietas</span>
+          <span className="metric-number">{speciesList.length || 35}</span>
+          <span className="metric-subtext">Varietas unggulan</span>
         </div>
 
-        <div className="metric-card metric-emerald">
-          <div className="metric-dot"></div>
-          <div className="metric-info">
-            <span className="metric-number">100%</span>
-            <span className="metric-label">Tingkat Hidup</span>
-          </div>
+        <div className="metric-card">
+          <span className="metric-label">Tingkat Hidup</span>
+          <span className="metric-number">100%</span>
+          <span className="metric-subtext">Kondisi baik & terawat</span>
         </div>
 
-        <div className="metric-card metric-blue">
-          <div className="metric-dot"></div>
-          <div className="metric-info">
-            <span className="metric-number">{stats?.total_planters || 13}</span>
-            <span className="metric-label">Kwarran Aktif</span>
-          </div>
+        <div className="metric-card">
+          <span className="metric-label">Kwarran Aktif</span>
+          <span className="metric-number">{stats?.total_planters || 13}</span>
+          <span className="metric-subtext">Kwartir ranting</span>
         </div>
       </div>
 
@@ -145,6 +137,16 @@ export default function Statistics({ onSelectSpecies }) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {searchTerm && (
+              <button
+                type="button"
+                className="search-clear-btn"
+                onClick={() => setSearchTerm('')}
+                title="Hapus"
+              >
+                &times;
+              </button>
+            )}
           </div>
 
           <div className="category-filter-buttons">
@@ -182,6 +184,13 @@ export default function Statistics({ onSelectSpecies }) {
           ) : displayedInChart.length === 0 ? (
             <div className="chart-empty">
               <p>Tidak ada varietas yang cocok dengan pencarian.</p>
+              <button
+                type="button"
+                className="reset-filter-btn"
+                onClick={() => { setSearchTerm(''); setCategoryFilter('ALL'); }}
+              >
+                Reset Filter
+              </button>
             </div>
           ) : (
             <div className="horizontal-bars-list">
@@ -192,13 +201,20 @@ export default function Statistics({ onSelectSpecies }) {
                 const isCoconut = (item.nama_lokal || '').toLowerCase().includes('kelapa');
 
                 return (
-                  <div key={item.nama_lokal || index} className="horizontal-bar-row">
+                  <div
+                    key={item.nama_lokal || index}
+                    className="horizontal-bar-row"
+                  >
                     <div className="bar-species-info">
                       <span className="species-row-rank">{index + 1}</span>
                       <div className="species-row-names">
-                        <strong className="species-row-local">{item.nama_lokal}</strong>
+                        <strong className="species-row-local" title={item.nama_lokal}>
+                          {item.nama_lokal}
+                        </strong>
                         {item.nama_latin && (
-                          <span className="species-row-latin">{item.nama_latin}</span>
+                          <span className="species-row-latin" title={item.nama_latin}>
+                            {item.nama_latin}
+                          </span>
                         )}
                       </div>
                     </div>
@@ -209,7 +225,9 @@ export default function Statistics({ onSelectSpecies }) {
                           className={`bar-fill ${isCoconut ? 'bar-coconut' : 'bar-fruit'}`}
                           style={{ width: `${barWidth}%` }}
                         >
-                          <span className="bar-inner-label">{count}</span>
+                          {barWidth > 12 && (
+                            <span className="bar-inner-label">{count}</span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -260,7 +278,7 @@ export default function Statistics({ onSelectSpecies }) {
                 <th style={{ textAlign: 'center', width: '90px' }}>%</th>
                 <th style={{ textAlign: 'center', width: '110px' }}>Tinggi Rata²</th>
                 <th style={{ textAlign: 'center', width: '100px' }}>Kondisi</th>
-                <th style={{ textAlign: 'center', width: '70px' }}>Aksi</th>
+                <th style={{ textAlign: 'center', width: '80px' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -295,7 +313,7 @@ export default function Statistics({ onSelectSpecies }) {
                       </span>
                     </td>
                     <td style={{ textAlign: 'center' }}>
-                      <span className="sp--badge">Hidup</span>
+                      <span className="sp-status-text">Hidup</span>
                     </td>
                     <td style={{ textAlign: 'center' }}>
                       {onSelectSpecies ? (

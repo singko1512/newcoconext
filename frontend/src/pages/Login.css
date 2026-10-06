@@ -480,11 +480,45 @@
   color: #8c7a6e;
 }
 
-/* Password Input */
-.label-with-link {
+/* Top Navigation (Kembali ke Dashboard - Only Arrow Icon) */
+.login-top-nav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.btn-back-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  color: #524137;
+  border: 1.5px solid #e5ded5;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.btn-back-icon:hover {
+  background: #fff8f0;
+  border-color: #CC6F00;
+  color: #CC6F00;
+  transform: translateX(-2px);
+  box-shadow: 0 2px 8px rgba(204, 111, 0, 0.15);
+}
+
+.btn-back-icon:active {
+  transform: translateX(0);
+}
+
+/* Password Input & Forgot Password Link */
+.forgot-link-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.35rem;
 }
 
 .forgot-link {
@@ -496,9 +530,11 @@
   color: #CC6F00;
   cursor: pointer;
   font-family: inherit;
+  transition: color 0.15s ease;
 }
 
 .forgot-link:hover {
+  color: #b35f00;
   text-decoration: underline;
 }
 

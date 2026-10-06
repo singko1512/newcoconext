@@ -1,6 +1,6 @@
 .home-map-wrapper {
   display: flex;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 60px);
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -8,12 +8,13 @@
   background: #f8fafc;
 }
 
-/* SIDEBAR DRAWER KIRI (OVERLAY DRAWER) */
+/* ==========================================
+   SIDEBAR DRAWER
+   ========================================== */
 .map-sidebar {
-  width: 390px;
+  width: 370px;
   max-width: 90vw;
   background: #ffffff;
-  border-right: 1px solid #e2e8f0;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -22,9 +23,10 @@
   bottom: 0;
   left: 0;
   z-index: 1005;
-  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.14);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateX(0);
+  border-right: 1px solid #e2e8f0;
 }
 
 .map-sidebar.sidebar-collapsed {
@@ -36,136 +38,79 @@
   display: none !important;
 }
 
+/* Close button tab */
 .sidebar-toggle-btn {
   position: absolute;
-  top: 18px;
-  right: -42px;
-  width: 42px;
-  height: 42px;
+  top: 16px;
+  right: -38px;
+  width: 38px;
+  height: 38px;
   background: #ffffff;
-  border: 1.5px solid #e2e8f0;
+  border: 1px solid #e2e8f0;
   border-left: none;
-  border-radius: 0 10px 10px 0;
-  box-shadow: 3px 2px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 0 8px 8px 0;
+  box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #334155;
+  color: #64748b;
   z-index: 1010;
-  transition: all 0.15s ease;
+  transition: color 0.2s ease, background 0.2s ease;
   padding: 0;
   pointer-events: auto;
 }
 
 .sidebar-toggle-btn:hover {
-  background: #ffffff;
-  color: #CC6F00;
-  box-shadow: 4px 3px 16px rgba(204, 111, 0, 0.25);
+  background: #f8fafc;
+  color: #0f172a;
 }
 
-.sidebar-close-header-btn {
-  background: #f1f5f9;
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #64748b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s ease;
-}
-
-.sidebar-close-header-btn:hover {
-  background: #fee2e2;
-  color: #ef4444;
-}
-
+/* Sidebar content area */
 .sidebar-content {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  padding: 1.25rem 1.25rem 0.5rem 1.25rem;
+  padding: 1.25rem 1rem 0.75rem 1rem;
 }
 
 .sidebar-header-box {
-  margin-bottom: 1rem;
-}
-
-.sidebar-badge {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #CC6F00;
-  background: #fef3c7;
-  border: 1px solid #fde68a;
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.85rem;
 }
 
 .sidebar-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  color: #1e293b;
-  margin: 0 0 0.35rem 0;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.3px;
+  font-family: inherit;
 }
 
-.sidebar-subtitle {
-  font-size: 0.8rem;
-  color: #64748b;
-  line-height: 1.45;
-  margin: 0 0 0.75rem 0;
-}
-
-.sidebar-stat-pills {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.stat-pill-sm {
-  font-size: 0.78rem;
-  color: #475569;
-  background: #f1f5f9;
-  padding: 0.25rem 0.65rem;
-  border-radius: 9999px;
-  border: 1px solid #e2e8f0;
-}
-
-.stat-pill-sm.highlight-pill {
-  background: #fef3c7;
-  color: #CC6F00;
-  border-color: #fde68a;
-}
-
-/* Search Box */
+/* ==========================================
+   SEARCH BOX
+   ========================================== */
 .sidebar-search-box {
   display: flex;
   align-items: center;
   background: #ffffff;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 0.45rem 0.75rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.65rem 0.9rem;
   margin-bottom: 0.85rem;
-  position: relative;
-  transition: all 0.15s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sidebar-search-box:focus-within {
   border-color: #CC6F00;
-  box-shadow: 0 0 0 3px rgba(204, 111, 0, 0.15);
-  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(204, 111, 0, 0.12);
 }
 
 .sidebar-search-box .search-icon {
-  margin-right: 0.5rem;
-  font-size: 0.9rem;
-  color: #64748b;
+  margin-right: 0.6rem;
+  font-size: 0.95rem;
+  color: #94a3b8;
   pointer-events: none;
   flex-shrink: 0;
 }
@@ -176,7 +121,7 @@
   outline: none !important;
   width: 100%;
   font-size: 0.9rem !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   color: #1e293b !important;
   caret-color: #CC6F00 !important;
   font-family: inherit !important;
@@ -187,37 +132,16 @@
   font-weight: 400 !important;
 }
 
-.clear-search-btn {
-  background: #f1f5f9;
-  border: none;
-  color: #64748b;
-  cursor: pointer;
-  font-size: 0.75rem;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin-left: 0.35rem;
-  flex-shrink: 0;
-  transition: all 0.15s ease;
-}
-
-.clear-search-btn:hover {
-  background: #e2e8f0;
-  color: #0f172a;
-}
-
-/* Scroll List */
+/* ==========================================
+   SCROLLABLE LIST
+   ========================================== */
 .sidebar-scroll-list {
   flex: 1;
   overflow-y: auto;
   padding-right: 4px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 10px;
   margin-bottom: 0.5rem;
 }
 
@@ -230,115 +154,159 @@
   border-radius: 9999px;
 }
 
-.sidebar-empty {
-  padding: 2rem 1rem;
-  text-align: center;
-  color: #94a3b8;
-  font-size: 0.85rem;
+.sidebar-scroll-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* Card Item Kecamatan */
+.sidebar-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   KECAMATAN LIST ITEMS (EXACT MATCH TO PHOTO)
+   ========================================== */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .kec-item-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.65rem 0.85rem;
+  padding: 0.75rem 0.95rem;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  border-left: 4px solid #b45309;
+  border-radius: 18px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
+  animation: fadeSlideUp 0.25s ease both;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  position: relative;
 }
 
 .kec-item-card:hover {
-  border-color: #CC6F00;
-  background: #fffdfa;
-  transform: translateX(2px);
-  box-shadow: 0 2px 8px rgba(204, 111, 0, 0.1);
+  background: #fffbeb;
+  border-color: #b45309;
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.12);
+  transform: translateX(3px);
 }
 
-.kec-item-card.card-has-trees {
-  border-left: 3px solid #CC6F00;
+.kec-item-card.active,
+.kec-item-card:focus {
+  background: #fffbeb;
+  border: 2px solid #b45309;
 }
 
 .kec-card-left {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.8rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .kec-idx {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 800;
   color: #94a3b8;
-  width: 18px;
+  width: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
 }
 
 .kec-card-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
 .kec-card-name {
-  font-size: 0.88rem;
-  color: #1e293b;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .kec-card-status {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   color: #64748b;
 }
 
 .kec-card-right {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
 }
 
 .kec-tree-badge {
-  font-size: 0.74rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  padding: 0.2rem 0.55rem;
-  border-radius: 9999px;
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid rgba(146, 64, 14, 0.15);
   white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.2s ease,
+              color 0.2s ease,
+              box-shadow 0.2s ease;
 }
 
 .kec-tree-badge.badge-trees {
   background: #fef3c7;
-  color: #CC6F00;
-  border: 1px solid #fde68a;
+  color: #92400e;
 }
 
 .kec-tree-badge.badge-zero {
-  background: #f1f5f9;
-  color: #94a3b8;
+  background: #f5f5f4;
+  color: #a8a29e;
+  border-color: rgba(168, 162, 158, 0.15);
 }
 
 
-/* Mode B: Detail Header */
+/* ==========================================
+   DETAIL MODE: SELECTED KECAMATAN HEADER
+   ========================================== */
 .selected-kec-header {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .back-to-overview-btn {
-  background: #f1f5f9;
-  color: #334155;
-  border: 1px solid #cbd5e1;
-  padding: 0.4rem 0.85rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
+  background: #f5f5f4;
+  color: #57534e;
+  border: none;
+  padding: 0.65rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  margin-bottom: 0.75rem;
-  transition: all 0.15s ease;
+  margin-bottom: 0.85rem;
+  transition: background 0.2s ease, color 0.2s ease;
   width: 100%;
   text-align: left;
+  font-family: inherit;
 }
 
 .back-to-overview-btn:hover {
-  background: #CC6F00;
+  background: #44403c;
   color: #ffffff;
-  border-color: #CC6F00;
 }
 
 .selected-kec-title-row {
@@ -348,12 +316,12 @@
 }
 
 .selected-kec-icon {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 .selected-tree-total {
-  font-size: 0.8rem;
-  color: #CC6F00;
+  font-size: 0.95rem;
+  color: #92400e;
   font-weight: 700;
 }
 
@@ -364,153 +332,197 @@
 .species-filter-dropdown-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
 }
 
 .dropdown-lbl {
-  font-size: 0.78rem;
-  color: #64748b;
+  font-size: 0.92rem;
+  color: #78716c;
   font-weight: 600;
 }
 
 .species-dropdown {
   flex: 1;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 0.35rem 0.5rem;
-  font-size: 0.8rem;
-  color: #334155;
+  background: #ffffff;
+  border: 1.5px solid #d6d3d1;
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #292524;
   outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  cursor: pointer;
+  appearance: auto;
 }
 
-/* Tree Cards List */
+.species-dropdown:focus {
+  border-color: #a8a29e;
+}
+
+/* ==========================================
+   TREE CARDS LIST
+   ========================================== */
 .tree-cards-list {
-  gap: 0.75rem;
+  gap: 12px;
+}
+
+@keyframes treeCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tree-list-item-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 0.85rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
-  transition: all 0.15s ease;
+  border: none;
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  animation: treeCardIn 0.25s ease both;
 }
 
+.tree-list-item-card:nth-child(1) { animation-delay: 0.03s; }
+.tree-list-item-card:nth-child(2) { animation-delay: 0.06s; }
+.tree-list-item-card:nth-child(3) { animation-delay: 0.09s; }
+.tree-list-item-card:nth-child(4) { animation-delay: 0.12s; }
+.tree-list-item-card:nth-child(5) { animation-delay: 0.15s; }
+
 .tree-list-item-card:hover {
-  border-color: #CC6F00;
-  box-shadow: 0 4px 12px rgba(204, 111, 0, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
 }
 
 .tree-item-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
 }
 
 .tree-item-title-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .tree-emoji-icon {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .tree-item-name {
   margin: 0;
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: #1e293b;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #292524;
+  letter-spacing: -0.1px;
 }
 
 .tree-item-latin {
-  font-size: 0.72rem;
-  color: #64748b;
+  font-size: 0.9rem;
+  color: #78716c;
 }
 
 .tree-item-status {
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #16a34a;
-  background: #ecfdf5;
-  padding: 0.15rem 0.45rem;
-  border-radius: 9999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #15803d;
+  background: #f0fdf4;
+  padding: 0.25rem 0.7rem;
+  border-radius: 8px;
   border: 1px solid #bbf7d0;
+  white-space: nowrap;
 }
 
 .tree-item-meta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.4rem 0.75rem;
-  font-size: 0.75rem;
-  margin-bottom: 0.65rem;
-  background: #f8fafc;
-  padding: 0.5rem 0.65rem;
-  border-radius: 6px;
+  gap: 0.5rem 0.85rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  background: #faf9f7;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
 }
 
 .meta-lbl {
-  color: #64748b;
+  color: #78716c;
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 500;
 }
 
 .meta-val {
-  color: #1e293b;
+  color: #292524;
+  font-weight: 600;
 }
 
 .meta-serial {
-  font-size: 0.68rem;
-  color: #b45309;
+  font-size: 0.82rem;
+  color: #92400e;
   background: #fef3c7;
-  padding: 0.1rem 0.3rem;
-  border-radius: 4px;
+  padding: 0.18rem 0.5rem;
+  border-radius: 6px;
+  font-family: ui-monospace, Consolas, monospace;
 }
 
+/* Tree card action buttons */
 .tree-item-actions {
   display: flex;
-  gap: 0.4rem;
+  gap: 6px;
 }
 
 .btn-locate-tree {
   flex: 1;
-  background: #CC6F00;
+  background: #92400e;
   color: #ffffff;
   border: none;
-  padding: 0.4rem 0.5rem;
-  border-radius: 6px;
+  padding: 0.42rem 0.5rem;
+  border-radius: 8px;
   font-size: 0.76rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.2s ease, transform 0.15s ease;
+  font-family: inherit;
 }
 
 .btn-locate-tree:hover {
-  background: #b35f00;
+  background: #78350f;
+  transform: translateY(-1px);
+}
+
+.btn-locate-tree:active {
+  transform: scale(0.97);
 }
 
 .btn-detail-tree {
-  background: #f1f5f9;
-  color: #475569;
-  border: 1px solid #cbd5e1;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
+  background: #f5f5f4;
+  color: #57534e;
+  border: none;
+  padding: 0.42rem 0.65rem;
+  border-radius: 8px;
   font-size: 0.76rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.2s ease;
+  font-family: inherit;
 }
 
 .btn-detail-tree:hover {
-  background: #e2e8f0;
+  background: #e7e5e4;
 }
 
-/* 2. MAP CONTAINER UTAMA */
+/* ==========================================
+   MAP CONTAINER
+   ========================================== */
 .map-view-container {
   flex: 1;
   position: relative;
@@ -526,7 +538,103 @@
   z-index: 1;
 }
 
-/* Floating Navigation On Map */
+/* ==========================================
+   FLOATING MAP CONTROLS
+   ========================================== */
+.floating-map-top-bar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  pointer-events: auto;
+}
+
+/* Burger button */
+@keyframes burgerPulse {
+  0%, 100% { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+  50% { box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15); }
+}
+
+.floating-burger-btn {
+  background: #ffffff;
+  color: #292524;
+  border: none;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+  animation: burgerPulse 3s ease-in-out infinite;
+}
+
+.floating-burger-btn svg {
+  color: #78716c;
+  flex-shrink: 0;
+}
+
+.floating-burger-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.floating-burger-btn:hover svg {
+  color: #292524;
+}
+
+.floating-burger-btn:active {
+  transform: scale(0.95);
+}
+
+/* Active kecamatan pill on map */
+.floating-active-kec-pill {
+  background: #44403c;
+  color: #ffffff;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  letter-spacing: -0.1px;
+}
+
+/* Add tree button */
+.floating-add-tree-btn {
+  background: #92400e;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(146, 64, 14, 0.25);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  pointer-events: auto;
+  font-family: inherit;
+}
+
+.floating-add-tree-btn:hover {
+  background: #78350f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(146, 64, 14, 0.35);
+}
+
+.floating-add-tree-btn:active {
+  transform: scale(0.97);
+}
+
+/* Floating Back Button */
 .floating-map-nav {
   position: absolute;
   top: 18px;
@@ -540,232 +648,170 @@
 
 .floating-back-btn {
   background: #ffffff;
-  color: #1e293b;
-  border: 1px solid #cbd5e1;
-  padding: 0.55rem 1.15rem;
-  border-radius: 9999px;
-  font-size: 0.84rem;
-  font-weight: 800;
+  color: #292524;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-  transition: all 0.15s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  font-family: inherit;
 }
 
 .floating-back-btn:hover {
-  background: #CC6F00;
+  background: #44403c;
   color: #ffffff;
-  border-color: #CC6F00;
   transform: translateY(-1px);
 }
 
-/* Floating Top Bar di Atas Peta */
-.floating-map-top-bar {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  pointer-events: auto;
-}
-
-.floating-burger-btn {
-  background: #ffffff;
-  color: #1e293b;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transition: all 0.15s ease;
-  padding: 0;
-}
-
-.floating-burger-btn svg {
-  color: #CC6F00;
-  flex-shrink: 0;
-}
-
-.floating-burger-btn:hover {
-  background: #ffffff;
-  border-color: #CC6F00;
-  color: #CC6F00;
-  box-shadow: 0 6px 20px rgba(204, 111, 0, 0.25);
-  transform: translateY(-1px);
-}
-
-.floating-active-kec-pill {
-  background: #CC6F00;
-  color: #ffffff;
-  padding: 0.55rem 1rem;
-  border-radius: 9999px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  box-shadow: 0 4px 14px rgba(204, 111, 0, 0.25);
-}
-
-.floating-add-tree-btn {
-  background: #CC6F00;
-  color: #ffffff;
-  border: none;
-  padding: 0.55rem 1.05rem;
-  border-radius: 10px;
-  font-size: 0.84rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(204, 111, 0, 0.35);
-  transition: all 0.15s ease;
-  pointer-events: auto;
-}
-
-.floating-add-tree-btn:hover {
-  background: #b35f00;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(204, 111, 0, 0.45);
-}
-
-/* Posisi & Desain Tombol Zoom (+ -) Leaflet di Kanan Atas */
+/* ==========================================
+   LEAFLET ZOOM CONTROLS
+   ========================================== */
 .leaflet-top.leaflet-right .leaflet-control-zoom {
-  margin-top: 18px;
-  margin-right: 18px;
+  margin-top: 16px;
+  margin-right: 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: none;
   overflow: hidden;
 }
 
 .leaflet-control-zoom a {
-  color: #1e293b !important;
+  color: #292524 !important;
   font-weight: 700 !important;
-  border-bottom: 1px solid #f1f5f9 !important;
+  border-bottom: 1px solid #f5f5f4 !important;
 }
 
 .leaflet-control-zoom a:hover {
-  background-color: #fff8f0 !important;
-  color: #CC6F00 !important;
+  background-color: #faf9f7 !important;
+  color: #78716c !important;
 }
 
-/* Loading Overlay */
+/* ==========================================
+   LOADING INDICATOR
+   ========================================== */
+@keyframes loadingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
 .map-loading-indicator {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
-  padding: 0.65rem 1rem;
-  border-radius: 9999px;
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #334155;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #57534e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 1002;
+  animation: loadingPulse 2s ease-in-out infinite;
 }
 
-/* CUSTOM 40 KECAMATAN MARKER (1 Titik per Kecamatan) */
+/* ==========================================
+   MAP PIN MARKERS (40 Kecamatan)
+   ========================================== */
 .custom-kec-marker {
   background: none;
   border: none;
 }
 
-/* Badge Ramping Elegan untuk Kecamatan dengan Pohon */
 .kec-pin-pill.has-trees {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.5rem;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
   background: #ffffff;
-  border: 1.5px solid #CC6F00;
-  color: #1e293b;
+  border: 2px solid #d6d3d1;
+  color: #292524;
   border-radius: 9999px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
   white-space: nowrap;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   font-family: inherit;
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 800;
 }
 
 .kec-pin-pill.has-trees:hover {
-  transform: scale(1.08);
-  box-shadow: 0 6px 16px rgba(204, 111, 0, 0.35);
-  border-color: #CC6F00;
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  border-color: #92400e;
   z-index: 9999 !important;
 }
 
 .kec-pin-pill.has-trees .kec-pin-icon {
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   line-height: 1;
 }
 
 .kec-pin-pill.has-trees .kec-pin-name {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.2px;
 }
 
 .kec-pin-pill.has-trees .kec-pin-count {
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   font-weight: 900;
-  background: #CC6F00;
+  background: #92400e;
   color: #ffffff;
-  padding: 0.1rem 0.4rem;
+  padding: 0.18rem 0.55rem;
   border-radius: 9999px;
   line-height: 1.2;
 }
 
-/* PIN KECAMATAN MINIMALIS (0 POHON - TITIK BULAT AGAR TIDAK TUMPANG TINDIH) */
+/* Zero tree pins */
 .custom-kec-marker-zero {
   background: none;
   border: none;
 }
 
 .kec-pin-dot-zero {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   background: #ffffff;
-  border: 1.5px solid #94a3b8;
+  border: 2px solid #d6d3d1;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   opacity: 0.85;
 }
 
 .kec-pin-dot-zero:hover {
   transform: scale(1.25);
   opacity: 1;
-  border-color: #CC6F00;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border-color: #92400e;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   z-index: 9999 !important;
 }
 
 .kec-dot-icon {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   line-height: 1;
 }
 
-/* Filter Tabs di Sidebar: Semua vs Ada Tanaman */
+/* ==========================================
+   FILTER TABS (Semua vs Ada Tanaman)
+   ========================================== */
 .kec-filter-tabs {
   display: flex;
-  gap: 0.35rem;
-  margin-bottom: 0.75rem;
-  background: #f1f5f9;
+  gap: 0.3rem;
+  margin-bottom: 0.65rem;
+  background: #f5f5f4;
   padding: 3px;
   border-radius: 8px;
 }
@@ -775,12 +821,12 @@
   padding: 0.4rem 0.5rem;
   border: none;
   background: transparent;
-  color: #64748b;
+  color: #78716c;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   font-family: inherit;
   white-space: nowrap;
   display: flex;
@@ -790,63 +836,71 @@
 }
 
 .kec-tab-btn:hover {
-  color: #1e293b;
+  color: #44403c;
 }
 
 .kec-tab-btn.active {
   background: #ffffff;
-  color: #CC6F00;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  color: #292524;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-weight: 700;
 }
 
-/* Popup Titik Kecamatan */
+/* ==========================================
+   MAP POPUP: KECAMATAN OVERVIEW
+   ========================================== */
 .kec-map-popup {
   padding: 0.25rem;
   font-family: inherit;
-  color: #1e293b;
+  color: #292524;
   min-width: 190px;
 }
 
 .kec-popup-badge {
-  font-size: 0.7rem;
-  font-weight: 800;
-  color: #CC6F00;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #92400e;
   background: #fef3c7;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   margin-bottom: 0.35rem;
+  display: inline-block;
 }
 
 .kec-popup-title {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 800;
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.2rem 0;
+  color: #292524;
 }
 
 .kec-popup-sub {
-  font-size: 0.8rem;
-  color: #475569;
-  margin: 0 0 0.65rem 0;
+  font-size: 0.78rem;
+  color: #57534e;
+  margin: 0 0 0.6rem 0;
 }
 
 .kec-popup-action-btn {
   width: 100%;
-  background: #CC6F00;
+  background: #44403c;
   color: #ffffff;
   border: none;
   padding: 0.45rem 0.75rem;
   border-radius: 6px;
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.2s ease;
+  font-family: inherit;
 }
 
 .kec-popup-action-btn:hover {
-  background: #b35f00;
+  background: #292524;
 }
 
-/* CUSTOM TREE MARKERS DI KECAMATAN */
+/* ==========================================
+   TREE MARKERS ON MAP
+   ========================================== */
 .custom-tree-pin {
   background: none;
   border: none;
@@ -857,118 +911,120 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
-  font-size: 1.15rem;
-  transition: transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
 }
 
 .tree-coconut {
   width: 34px;
   height: 34px;
   background: #fffbeb;
-  border: 2px solid #b45309;
+  border: 2px solid #a16207;
 }
 
 .tree-sprout {
   width: 30px;
   height: 30px;
-  background: #ecfdf5;
-  border: 2px solid #059669;
+  background: #f0fdf4;
+  border: 2px solid #15803d;
 }
 
 .custom-tree-pin:hover .tree-pin-inner {
-  transform: scale(1.25);
+  transform: scale(1.2);
 }
 
-/* Popup Leaflet Tree */
+/* ==========================================
+   TREE MAP POPUP
+   ========================================== */
 .map-popup-card {
-  padding: 0.35rem 0.2rem;
+  padding: 0.5rem 0.3rem;
   font-family: inherit;
-  color: #1f2937;
-  min-width: 210px;
+  color: #292524;
+  min-width: 220px;
 }
 
 .popup-badge {
   display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 800;
+  font-size: 0.78rem;
+  font-weight: 700;
   background: #fef3c7;
-  color: #CC6F00;
-  padding: 0.2rem 0.55rem;
+  color: #92400e;
+  padding: 0.25rem 0.6rem;
   border-radius: 4px;
   margin-bottom: 0.4rem;
 }
 
 .popup-title {
   margin: 0 0 0.2rem 0;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 800;
-  color: #2b1d16;
+  color: #292524;
 }
 
 .popup-latin {
   margin: 0 0 0.5rem 0;
-  font-size: 0.8rem;
-  color: #6b7280;
+  font-size: 0.85rem;
+  color: #78716c;
 }
 
 .popup-details {
-  font-size: 0.8rem;
-  color: #4b5563;
-  margin-bottom: 0.65rem;
+  font-size: 0.85rem;
+  color: #57534e;
+  margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3rem;
 }
 
 .popup-view-btn {
   width: 100%;
-  background: #CC6F00;
+  background: #44403c;
   color: #ffffff;
   border: none;
-  padding: 0.45rem 0.75rem;
+  padding: 0.55rem 0.85rem;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.78rem;
-  font-weight: 800;
-  transition: background 0.15s ease;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: background 0.2s ease;
+  font-family: inherit;
 }
 
 .popup-view-btn:hover {
-  background: #b35f00;
+  background: #292524;
 }
 
-/* 3. Detail Drawer Pohon (Floating Right) */
-.tree-detail-drawer {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 340px;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
-  border: 1px solid #e5e7eb;
-  z-index: 1004;
-  overflow: hidden;
-  animation: slideInRight 0.25s ease-out;
-}
-
-@keyframes slideInRight {
+/* ==========================================
+   DETAIL DRAWER (Right floating panel)
+   ========================================== */
+@keyframes drawerSlideIn {
   from {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateY(12px);
   }
-
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
+}
+
+.tree-detail-drawer {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 360px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1004;
+  overflow: hidden;
+  animation: drawerSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .drawer-header {
-  padding: 1rem 1.25rem;
-  background: #CC6F00;
+  padding: 1rem 1.15rem;
+  background: #44403c;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
@@ -977,38 +1033,38 @@
 
 .drawer-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: #ffffff;
 }
 
 .drawer-latin {
-  font-size: 0.75rem;
-  color: #fff7ed;
-  opacity: 0.95;
+  font-size: 0.82rem;
+  color: #d6d3d1;
 }
 
 .drawer-close-btn {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
   border: none;
   color: #ffffff;
-  font-size: 0.85rem;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .drawer-close-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .drawer-body {
-  padding: 1rem 1.25rem;
-  max-height: 440px;
+  padding: 1rem 1.15rem;
+  max-height: 460px;
   overflow-y: auto;
 }
 
@@ -1019,22 +1075,22 @@
 }
 
 .badge-serial {
-  font-size: 0.75rem;
-  background: #f1f5f9;
-  color: #334155;
-  padding: 0.2rem 0.55rem;
+  font-size: 0.8rem;
+  background: #f5f5f4;
+  color: #57534e;
+  padding: 0.25rem 0.6rem;
   border-radius: 6px;
-  font-weight: 700;
-  font-family: monospace;
+  font-weight: 600;
+  font-family: ui-monospace, Consolas, monospace;
 }
 
 .badge- {
-  font-size: 0.75rem;
-  background: #ecfdf5;
-  color: #059669;
-  padding: 0.2rem 0.55rem;
+  font-size: 0.8rem;
+  background: #f0fdf4;
+  color: #15803d;
+  padding: 0.25rem 0.6rem;
   border-radius: 6px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .detail-grid {
@@ -1048,39 +1104,131 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.82rem;
-  border-bottom: 1px dashed #f1f5f9;
-  padding-bottom: 0.35rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid #f5f5f4;
+  padding-bottom: 0.45rem;
 }
 
 .detail-lbl {
-  color: #6b7280;
+  color: #78716c;
+  font-weight: 500;
 }
 
 .detail-val {
-  color: #1f2937;
+  color: #292524;
   text-align: right;
+  font-weight: 600;
 }
 
 .detail-story-box {
-  background: #fffbeb;
+  background: #fefce8;
   border: 1px solid #fef3c7;
-  padding: 0.75rem;
+  padding: 0.85rem;
   border-radius: 8px;
-  margin-top: 0.5rem;
+  margin-top: 0.45rem;
 }
 
 .story-title {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  color: #CC6F00;
+  color: #92400e;
   margin-bottom: 0.25rem;
 }
 
 .story-text {
   margin: 0;
-  font-size: 0.8rem;
-  color: #451a03;
-  line-height: 1.4;
+  font-size: 0.85rem;
+  color: #44403c;
+  line-height: 1.45;
   font-style: italic;
+}
+
+/* ==========================================
+   MISC STAT PILLS
+   ========================================== */
+.sidebar-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #92400e;
+  background: #fef3c7;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 0.4rem;
+}
+
+.sidebar-subtitle {
+  font-size: 0.85rem;
+  color: #78716c;
+  line-height: 1.45;
+  margin: 0 0 0.75rem 0;
+}
+
+.sidebar-stat-pills {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.stat-pill-sm {
+  font-size: 0.75rem;
+  color: #57534e;
+  background: #f5f5f4;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+.stat-pill-sm.highlight-pill {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.clear-search-btn {
+  background: #f5f5f4;
+  border: none;
+  color: #78716c;
+  cursor: pointer;
+  font-size: 0.72rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 0.3rem;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.clear-search-btn:hover {
+  background: #e7e5e4;
+  color: #292524;
+}
+
+/* Spinner */
+.spinner-mini {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #d6d3d1;
+  border-top-color: #78716c;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Leaflet tooltip override */
+.leaflet-tooltip,
+.kec-leaflet-tooltip {
+  font-family: inherit !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  padding: 0.4rem 0.7rem !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border: none !important;
+  pointer-events: none !important;
+  z-index: 900 !important;
 }

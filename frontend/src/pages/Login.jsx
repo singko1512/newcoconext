@@ -210,6 +210,22 @@ export default function Login({ onNavigateToHome }) {
       {/* Kolom Kanan: Form Card Login / Daftar */}
       <div className="login-form-panel">
         <div className="login-card">
+          {/* Tombol Kembali ke Dashboard (Hanya Ikon Arrow) */}
+          <div className="login-top-nav">
+            <button
+              type="button"
+              className="btn-back-icon"
+              onClick={() => onNavigateToHome && onNavigateToHome()}
+              title="Kembali ke Dashboard"
+              aria-label="Kembali ke Dashboard"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+            </button>
+          </div>
+
           {/* Logo Tunas Kelapa Scout */}
           <div className="logo-container">
             <div className="logo-badge">
@@ -294,18 +310,9 @@ export default function Login({ onNavigateToHome }) {
 
               {/* Input Kata Sandi */}
               <div className="form-group">
-                <div className="label-with-link">
-                  <label htmlFor="password-input" className="form-label">
-                    KATA SANDI
-                  </label>
-                  <button
-                    type="button"
-                    className="forgot-link"
-                    onClick={() => alert('Silakan hubungi administrator Kwarcab untuk reset kata sandi.')}
-                  >
-                    Lupa sandi?
-                  </button>
-                </div>
+                <label htmlFor="password-input" className="form-label">
+                  KATA SANDI
+                </label>
 
                 <div className="input-with-icon">
                   <input
@@ -334,6 +341,16 @@ export default function Login({ onNavigateToHome }) {
                         <circle cx="12" cy="12" r="3" />
                       </svg>
                     )}
+                  </button>
+                </div>
+
+                <div className="forgot-link-wrapper">
+                  <button
+                    type="button"
+                    className="forgot-link"
+                    onClick={() => alert('Silakan hubungi administrator Kwarcab untuk reset kata sandi.')}
+                  >
+                    Lupa sandi?
                   </button>
                 </div>
               </div>
@@ -512,7 +529,10 @@ export default function Login({ onNavigateToHome }) {
           {/* Bawah Card Footer */}
           <div className="card-footer-info">
             <p className="copyright-text">
-              Aplikasi Penanaman Pohon • Kwartir Cabang Pramuka Kabupaten Bogor © 2024
+              Aplikasi Penanaman Pohon • Kwartir Cabang Pramuka
+            </p>
+            <p className="copyright-text">
+              Kabupaten Bogor © 2026
             </p>
           </div>
         </div>

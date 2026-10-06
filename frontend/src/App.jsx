@@ -1,15 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Rank from './pages/Rank';
 import Statistics from './pages/Statistics';
 import logoImg from './assets/logo.jpg';
+import './App.css';
+
+const NAV_ITEMS = [
+  { key: 'home', label: 'Peta' },
+  { key: 'rank', label: 'Peringkat Penanam' },
+  { key: 'statistics', label: 'Statistik Tanaman' },
+];
 
 function MainApp() {
   const { user, logout } = useAuth();
   const [currentPage, setCurrentPage] = useState('home');
   const [filterKecamatan, setFilterKecamatan] = useState('ALL');
+
+  // Refs for sliding indicator
+  const navRef = useRef(null);
+  const btnRefs = useRef({});
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+
+  // Measure active button and update indicator
+  const updateIndicator = useCallback(() => {
+    const activeBtn = btnRefs.current[currentPage];
+    const navEl = navRef.current;
+    if (activeBtn && navEl) {
+      const navRect = navEl.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      setIndicator({
+        left: btnRect.left - navRect.left,
+        width: btnRect.width,
+      });
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    updateIndicator();
+    window.addEventListener('resize', updateIndicator);
+    return () => window.removeEventListener('resize', updateIndicator);
+  }, [updateIndicator]);
 
   // Navigasi dari halaman Rank ke Peta dengan memfilter kecamatan yang dipilih
   const handleSelectKecamatanFromRank = (kecKey) => {
@@ -25,108 +57,82 @@ function MainApp() {
   return (
     <div className="app-container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
       {/* Top Header Navbar */}
-      <header
-        style={{
-          padding: '0.65rem 1.75rem',
-          background: '#ffffff',
-          color: '#1f2937',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          boxShadow: '0 1px 4px rgba(0, 0, 0, 0.06)',
-          borderBottom: '1px solid #e5e7eb',
-          zIndex: 1010,
-          position: 'sticky',
-          top: 0,
-        }}
-      >
+      <header className="navbar">
         {/* Brand & Logo */}
         <div
-          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}
+          className="navbar-brand"
           onClick={() => setCurrentPage('home')}
         >
-          <img
-            src={logoImg}
-            alt="Logo Kwarcab Bogor"
-            style={{ width: '38px', height: '38px', objectFit: 'contain' }}
-          />
-          <div>
-            <div style={{ fontWeight: 900, fontSize: '1.05rem', letterSpacing: '0.5px', color: '#1f2937' }}>
-              COCONEXT
-            </div>
-            <div style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 700, letterSpacing: '0.3px' }}>
-              KWARCAB BOGOR
-            </div>
+          <div className="navbar-logo-wrap">
+            <img
+              src={logoImg}
+              alt="Logo Kwarcab Bogor"
+              className="navbar-logo"
+            />
+          </div>
+          <div className="navbar-brand-text">
+            <span className="navbar-brand-name">COCONEXT</span>
+            <span className="navbar-brand-sub">KWARCAB BOGOR</span>
           </div>
         </div>
 
-        {/* Menu Navigasi Utama: Peta, Rank, Statistik */}
-        <nav style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <button
-            type="button"
-            onClick={() => setCurrentPage('home')}
+        {/* Menu Navigasi Utama dengan sliding indicator */}
+        <nav className="navbar-nav" ref={navRef}>
+          {/* Sliding pill indicator */}
+          <div
+            className="navbar-indicator"
             style={{
-              ...navBtnStyle,
-              ...(currentPage === 'home' ? activeNavBtnStyle : {}),
+              transform: `translateX(${indicator.left}px)`,
+              width: `${indicator.width}px`,
             }}
-          >
-            Peta
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setCurrentPage('rank')}
-            style={{
-              ...navBtnStyle,
-              ...(currentPage === 'rank' ? activeNavBtnStyle : {}),
-            }}
-          >
-            Peringkat Penanam
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setCurrentPage('statistics')}
-            style={{
-              ...navBtnStyle,
-              ...(currentPage === 'statistics' ? activeNavBtnStyle : {}),
-            }}
-          >
-            Statistik Tanaman
-          </button>
+          />
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.key}
+              type="button"
+              ref={(el) => { btnRefs.current[item.key] = el; }}
+              className={`navbar-nav-btn${currentPage === item.key ? ' active' : ''}`}
+              onClick={() => setCurrentPage(item.key)}
+            >
+              {item.label}
+            </button>
+          ))}
         </nav>
 
         {/* User Info & Login / Logout */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.1rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.25 }}>
-            <span style={{ fontSize: '0.85rem', color: '#1f2937', fontWeight: 700 }}>
-              {user ? user.name || user.username : ''}
+        <div className="navbar-actions">
+          {user && (
+            <span className="navbar-user-name">
+              {user.name || user.username}
             </span>
-          </div>
-
+          )}
           <button
             type="button"
+            className={`navbar-auth-btn ${user ? 'logout' : 'login'}`}
             onClick={() => {
               if (user) logout();
               setCurrentPage('login');
             }}
-            style={{
-              background: user ? '#ef4444' : '#CC6F00',
-              color: '#ffffff',
-              border: 'none',
-              padding: '0.45rem 1rem',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '0.82rem',
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              boxShadow: user ? '0 2px 6px rgba(239, 68, 68, 0.25)' : '0 2px 6px rgba(204, 111, 0, 0.25)',
-              transition: 'all 0.15s ease',
-            }}
           >
-            {user ? 'Keluar' : 'Masuk'}
+            {user ? (
+              <>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Keluar
+              </>
+            ) : (
+              <>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                  <polyline points="10 17 15 12 10 7" />
+                  <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+                Masuk
+              </>
+            )}
           </button>
         </div>
       </header>
@@ -148,28 +154,6 @@ function MainApp() {
     </div>
   );
 }
-
-const navBtnStyle = {
-  background: 'transparent',
-  color: '#374151',
-  border: 'none',
-  padding: '0.45rem 0.95rem',
-  borderRadius: '8px',
-  cursor: 'pointer',
-  fontSize: '0.85rem',
-  fontWeight: 600,
-  transition: 'all 0.15s ease',
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.35rem',
-};
-
-const activeNavBtnStyle = {
-  background: '#CC6F00',
-  color: '#ffffff',
-  fontWeight: 700,
-  boxShadow: '0 2px 6px rgba(204, 111, 0, 0.25)',
-};
 
 export default function App() {
   return (

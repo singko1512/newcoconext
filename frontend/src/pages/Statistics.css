@@ -1,7 +1,21 @@
 /* ===================================================
-   STATISTICS PAGE — Coconext App Design System
-   Clean, structured, and consistent with Home & Rank
+   STATISTICS PAGE — Clean & High-End Dashboard Design
    =================================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
 
 .stats-container {
   padding: 1.5rem 2rem 2.5rem;
@@ -32,6 +46,11 @@
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   margin-bottom: 0.6rem;
+  transition: transform 0.2s ease;
+}
+
+.stats-badge:hover {
+  transform: translateY(-1px);
 }
 
 .stats-title {
@@ -50,7 +69,7 @@
   line-height: 1.55;
 }
 
-/* ===== METRICS GRID ===== */
+/* ===== TYPOGRAPHY METRICS GRID ===== */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -59,61 +78,55 @@
 }
 
 .metric-card {
-  background: #fff;
-  padding: 1.15rem 1.25rem;
-  border-radius: 12px;
+  background: #ffffff;
+  padding: 1.25rem 1.35rem;
+  border-radius: 14px;
   border: 1.5px solid #e2e8f0;
   display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .metric-card:hover {
-  transform: translateY(-2px);
-  border-color: #cbd5e1;
-}
-
-.metric-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.metric-primary .metric-dot { background: #CC6F00; }
-.metric-amber .metric-dot { background: #f59e0b; }
-.metric-emerald .metric-dot { background: #10b981; }
-.metric-blue .metric-dot { background: #3b82f6; }
-
-.metric-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.metric-number {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #0f172a;
-  line-height: 1.1;
+  transform: translateY(-3px);
+  border-color: #CC6F00;
+  box-shadow: 0 8px 24px -4px rgba(204, 111, 0, 0.12);
 }
 
 .metric-label {
   font-size: 0.72rem;
   color: #64748b;
   font-weight: 700;
-  margin-top: 0.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-number {
+  font-size: 1.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0.1rem 0;
+}
+
+.metric-subtext {
+  font-size: 0.74rem;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 /* ===== MAIN SECTION ===== */
 .stats-section {
-  background: #fff;
-  border-radius: 12px;
+  background: #ffffff;
+  border-radius: 14px;
   padding: 1.5rem;
   border: 1.5px solid #e2e8f0;
   margin-bottom: 1.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
 .section-header {
@@ -152,15 +165,15 @@
 }
 
 .limit-btn {
-  background: #fff;
+  background: #ffffff;
   border: 1.5px solid #e2e8f0;
   color: #64748b;
-  padding: 0.3rem 0.6rem;
+  padding: 0.3rem 0.65rem;
   border-radius: 6px;
   font-size: 0.72rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .limit-btn:hover {
@@ -170,8 +183,9 @@
 
 .limit-btn.active {
   background: #CC6F00;
-  color: #fff;
+  color: #ffffff;
   border-color: #CC6F00;
+  box-shadow: 0 2px 6px rgba(204, 111, 0, 0.2);
 }
 
 /* Controls bar */
@@ -194,12 +208,12 @@
   border-radius: 8px;
   padding: 0.45rem 0.75rem;
   width: 300px;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .chart-search-box:focus-within {
   border-color: #CC6F00;
-  background: #fff;
+  background: #ffffff;
   box-shadow: 0 0 0 3px rgba(204, 111, 0, 0.12);
 }
 
@@ -219,6 +233,26 @@
   font-family: inherit;
 }
 
+.search-clear-btn {
+  background: #e2e8f0;
+  border: none;
+  color: #64748b;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  cursor: pointer;
+  margin-left: 0.3rem;
+}
+
+.search-clear-btn:hover {
+  background: #cbd5e1;
+  color: #0f172a;
+}
+
 .category-filter-buttons {
   display: flex;
   gap: 0.35rem;
@@ -226,7 +260,7 @@
 }
 
 .cat-btn {
-  background: #fff;
+  background: #ffffff;
   border: 1.5px solid #e2e8f0;
   padding: 0.35rem 0.75rem;
   border-radius: 7px;
@@ -234,7 +268,7 @@
   font-weight: 700;
   color: #64748b;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .cat-btn:hover {
@@ -265,11 +299,12 @@
   gap: 0.85rem;
   padding: 0.5rem 0.65rem;
   border-radius: 8px;
-  transition: background 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .horizontal-bar-row:hover {
   background: #f8fafc;
+  transform: translateX(2px);
 }
 
 .bar-species-info {
@@ -283,9 +318,10 @@
 .species-row-rank {
   font-size: 0.72rem;
   font-weight: 800;
-  color: #cbd5e1;
+  color: #94a3b8;
   width: 24px;
   text-align: right;
+  flex-shrink: 0;
 }
 
 .species-row-names {
@@ -334,14 +370,14 @@
   align-items: center;
   justify-content: flex-end;
   padding-right: 8px;
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bar-coconut { background: #CC6F00; }
 .bar-fruit { background: #059669; }
 
 .bar-inner-label {
-  color: #fff;
+  color: #ffffff;
   font-size: 0.68rem;
   font-weight: 800;
 }
@@ -372,22 +408,24 @@
 }
 
 .bar-action-btn {
-  background: #fff;
+  background: #ffffff;
   color: #64748b;
   border: 1.5px solid #e2e8f0;
-  padding: 0.28rem 0.6rem;
+  padding: 0.28rem 0.65rem;
   border-radius: 6px;
   font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
 .bar-action-btn:hover {
   background: #CC6F00;
-  color: #fff;
+  color: #ffffff;
   border-color: #CC6F00;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(204, 111, 0, 0.2);
 }
 
 /* ===== TABLE SECTION ===== */
@@ -454,11 +492,11 @@
 }
 
 .species-table tbody tr {
-  transition: background 0.1s;
+  transition: background 0.15s ease;
 }
 
 .species-table tbody tr:hover {
-  background: #fdfdfd;
+  background: #f8fafc;
 }
 
 .sp-title {
@@ -490,14 +528,19 @@
   font-size: 0.78rem;
 }
 
-.sp--badge {
+.sp-status-text {
   color: #059669;
   font-weight: 700;
   font-size: 0.72rem;
+  background: #ecfdf5;
+  padding: 0.2rem 0.55rem;
+  border-radius: 12px;
+  border: 1px solid #a7f3d0;
+  display: inline-block;
 }
 
 .table-action-btn {
-  background: #fff;
+  background: #ffffff;
   color: #475569;
   border: 1.5px solid #e2e8f0;
   padding: 0.28rem 0.6rem;
@@ -505,14 +548,15 @@
   cursor: pointer;
   font-size: 0.7rem;
   font-weight: 700;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .table-action-btn:hover {
   background: #CC6F00;
-  color: #fff;
+  color: #ffffff;
   border-color: #CC6F00;
+  box-shadow: 0 3px 8px rgba(204, 111, 0, 0.2);
 }
 
 /* Loading & empty */
@@ -522,6 +566,25 @@
   text-align: center;
   color: #94a3b8;
   font-size: 0.85rem;
+}
+
+.reset-filter-btn {
+  margin-top: 0.5rem;
+  background: #f1f5f9;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-filter-btn:hover {
+  background: #CC6F00;
+  color: #ffffff;
+  border-color: #CC6F00;
 }
 
 .spinner-mini {

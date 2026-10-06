@@ -1,3 +1,180 @@
+/* ======================================
+   NAVBAR
+   ====================================== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1010;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Brand */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+}
+
+.navbar-logo-wrap {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navbar-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.navbar-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.navbar-brand-name {
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 1.2px;
+  color: #1a1a1a;
+}
+
+.navbar-brand-sub {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+/* Navigation with sliding indicator */
+.navbar-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.navbar-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  border-radius: 8px;
+  background: #CC6F00;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(204, 111, 0, 0.25);
+}
+
+.navbar-nav-btn {
+  position: relative;
+  z-index: 1;
+  background: none;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav-btn:hover {
+  color: #1e293b;
+}
+
+.navbar-nav-btn.active {
+  color: #ffffff;
+}
+
+/* Auth actions */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.navbar-user-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.navbar-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1.05rem;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.navbar-auth-btn:hover {
+  transform: translateY(-1px);
+}
+
+.navbar-auth-btn:active {
+  transform: translateY(0);
+}
+
+.navbar-auth-btn.login {
+  background: #CC6F00;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(204, 111, 0, 0.25);
+}
+
+.navbar-auth-btn.login:hover {
+  background: #b56200;
+  box-shadow: 0 4px 12px rgba(204, 111, 0, 0.3);
+}
+
+.navbar-auth-btn.logout {
+  background: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.25);
+}
+
+.navbar-auth-btn.logout:hover {
+  background: #dc2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+
+/* ======================================
+   LEGACY / OTHER STYLES
+   ====================================== */
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
