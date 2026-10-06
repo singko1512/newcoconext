@@ -609,6 +609,29 @@
   box-shadow: 0 4px 14px rgba(204, 111, 0, 0.25);
 }
 
+.floating-add-tree-btn {
+  background: #CC6F00;
+  color: #ffffff;
+  border: none;
+  padding: 0.55rem 1.05rem;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(204, 111, 0, 0.35);
+  transition: all 0.15s ease;
+  pointer-events: auto;
+}
+
+.floating-add-tree-btn:hover {
+  background: #b35f00;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(204, 111, 0, 0.45);
+}
+
 /* Posisi & Desain Tombol Zoom (+ -) Leaflet di Kanan Atas */
 .leaflet-top.leaflet-right .leaflet-control-zoom {
   margin-top: 18px;

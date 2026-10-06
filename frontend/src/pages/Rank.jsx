@@ -59,21 +59,22 @@ export default function Rank({ onSelectKecamatan }) {
 
   return (
     <div className="rank-container">
-      {/* Header Banner */}
+      {/* Header */}
       <div className="rank-header">
-        <div className="rank-badge">🏆 LEADERBOARD PRAMUKA KABUPATEN BOGOR</div>
+        <div className="rank-badge">LEADERBOARD KWARCAB BOGOR</div>
         <h1 className="rank-title">Peringkat Penanaman Pohon</h1>
         <p className="rank-subtitle">
-          Data capaian penanaman pohon oleh seluruh Kwartir Ranting se-Kabupaten Bogor dengan rekapitulasi pertahun 2025–2030 serta catatan penanaman tanggal terakhir.
+          Data capaian penanaman pohon oleh seluruh Kwartir Ranting se-Kabupaten Bogor
+          dengan rekapitulasi pertahun 2025–2030 serta catatan penanaman terakhir.
         </p>
       </div>
 
       {/* Podium Top 3 */}
       {!loading && top3.length >= 3 && (
         <div className="podium-section">
-          {/* Juara 2 */}
+          {/* 2nd Place */}
           <div className="podium-card podium-silver">
-            <div className="podium-medal">🥈</div>
+            <div className="podium-medal">2</div>
             <div className="podium-rank-number">#2</div>
             <h3 className="podium-name">{top3[1].fullname || top3[1].username}</h3>
             <p className="podium-org">{top3[1].org || 'Kwarran'}</p>
@@ -82,7 +83,7 @@ export default function Rank({ onSelectKecamatan }) {
               <span className="count-label">Pohon</span>
             </div>
             <div className="podium-detail">
-              <span>📅 Terakhir: {formatDate(top3[1].last_planting_date)}</span>
+              Terakhir: {formatDate(top3[1].last_planting_date)}
             </div>
             {onSelectKecamatan && (
               <button
@@ -90,15 +91,15 @@ export default function Rank({ onSelectKecamatan }) {
                 className="podium-btn"
                 onClick={() => onSelectKecamatan(top3[1].username)}
               >
-                Lihat di Peta 🗺️
+                Lihat di Peta
               </button>
             )}
           </div>
 
-          {/* Juara 1 */}
+          {/* 1st Place */}
           <div className="podium-card podium-gold">
-            <div className="crown-badge">👑 JUARA 1</div>
-            <div className="podium-medal">🥇</div>
+            <div className="crown-badge">PERINGKAT 1</div>
+            <div className="podium-medal">1</div>
             <div className="podium-rank-number">#1</div>
             <h3 className="podium-name">{top3[0].fullname || top3[0].username}</h3>
             <p className="podium-org">{top3[0].org || 'Kwarran'}</p>
@@ -107,7 +108,7 @@ export default function Rank({ onSelectKecamatan }) {
               <span className="count-label">Pohon Ditanam</span>
             </div>
             <div className="podium-detail">
-              <span>📅 Terakhir: {formatDate(top3[0].last_planting_date)}</span>
+              Terakhir: {formatDate(top3[0].last_planting_date)}
             </div>
             {onSelectKecamatan && (
               <button
@@ -115,14 +116,14 @@ export default function Rank({ onSelectKecamatan }) {
                 className="podium-btn"
                 onClick={() => onSelectKecamatan(top3[0].username)}
               >
-                Lihat di Peta 🗺️
+                Lihat di Peta
               </button>
             )}
           </div>
 
-          {/* Juara 3 */}
+          {/* 3rd Place */}
           <div className="podium-card podium-bronze">
-            <div className="podium-medal">🥉</div>
+            <div className="podium-medal">3</div>
             <div className="podium-rank-number">#3</div>
             <h3 className="podium-name">{top3[2].fullname || top3[2].username}</h3>
             <p className="podium-org">{top3[2].org || 'Kwarran'}</p>
@@ -131,7 +132,7 @@ export default function Rank({ onSelectKecamatan }) {
               <span className="count-label">Pohon</span>
             </div>
             <div className="podium-detail">
-              <span>📅 Terakhir: {formatDate(top3[2].last_planting_date)}</span>
+              Terakhir: {formatDate(top3[2].last_planting_date)}
             </div>
             {onSelectKecamatan && (
               <button
@@ -139,24 +140,23 @@ export default function Rank({ onSelectKecamatan }) {
                 className="podium-btn"
                 onClick={() => onSelectKecamatan(top3[2].username)}
               >
-                Lihat di Peta 🗺️
+                Lihat di Peta
               </button>
             )}
           </div>
         </div>
       )}
 
-      {/* Kontrol Pencarian, Filter & Statistik Singkat */}
-      <div className="rank-table-header">
-        <div className="rank-search-row">
-          <div className="search-box">
-            <span className="search-icon">🔍</span>
+      {/* Controls Row */}
+      <div className="rank-controls">
+        <div className="rank-controls-left">
+          <div className="rank-search-box">
+            <span className="search-icon">&#9906;</span>
             <input
               type="text"
-              placeholder=" Kwarran / Kecamatan..."
+              placeholder="Cari Kwarran / Kecamatan..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
             />
           </div>
 
@@ -173,17 +173,17 @@ export default function Rank({ onSelectKecamatan }) {
               className={`filter-chip ${filterActiveOnly ? 'active' : ''}`}
               onClick={() => setFilterActiveOnly(true)}
             >
-              Hanya yang Ada Tanaman ({activeKwarranCount})
+              Ada Tanaman ({activeKwarranCount})
             </button>
           </div>
         </div>
 
-        <div className="total-kwarran-badge">
-          Total: <strong>{totalAllTrees}</strong> Pohon • <strong>{ranks.length}</strong> Kwarran
+        <div className="rank-summary">
+          Total: <strong>{totalAllTrees}</strong> Pohon &middot; <strong>{ranks.length}</strong> Kwarran
         </div>
       </div>
 
-      {/* Tabel Lengkap Peringkat */}
+      {/* Table */}
       <div className="rank-table-wrapper">
         {loading ? (
           <div className="rank-loading">
@@ -192,24 +192,24 @@ export default function Rank({ onSelectKecamatan }) {
           </div>
         ) : filteredRanks.length === 0 ? (
           <div className="rank-empty">
-            <p>Tidak ditemukan data kwarran yang sesuai kata kunci pencarian.</p>
+            <p>Tidak ditemukan data kwarran yang sesuai pencarian.</p>
           </div>
         ) : (
           <div className="table-responsive">
             <table className="rank-table">
               <thead>
                 <tr>
-                  <th style={{ width: '60px', textAlign: 'center' }}>NOMOR</th>
-                  <th style={{ minWidth: '180px' }}>NAMA KWARAN</th>
-                  <th style={{ textAlign: 'center', minWidth: '110px' }}>JUMLAH TOTAL TANAMAN</th>
-                  <th style={{ textAlign: 'center', minWidth: '170px' }}>TANGGAL TERAKHIR & JUMLAH</th>
-                  <th style={{ textAlign: 'center', width: '70px' }}>2025</th>
-                  <th style={{ textAlign: 'center', width: '70px' }}>2026</th>
-                  <th style={{ textAlign: 'center', width: '70px' }}>2027</th>
-                  <th style={{ textAlign: 'center', width: '70px' }}>2028</th>
-                  <th style={{ textAlign: 'center', width: '70px' }}>2029</th>
-                  <th style={{ textAlign: 'center', width: '70px' }}>2030</th>
-                  <th style={{ textAlign: 'center', width: '100px' }}>AKSI</th>
+                  <th style={{ width: '55px', textAlign: 'center' }}>No</th>
+                  <th style={{ minWidth: '180px' }}>Nama Kwaran</th>
+                  <th style={{ textAlign: 'center', minWidth: '110px' }}>Total Tanaman</th>
+                  <th style={{ textAlign: 'center', minWidth: '160px' }}>Terakhir & Jumlah</th>
+                  <th style={{ textAlign: 'center', width: '65px' }}>2025</th>
+                  <th style={{ textAlign: 'center', width: '65px' }}>2026</th>
+                  <th style={{ textAlign: 'center', width: '65px' }}>2027</th>
+                  <th style={{ textAlign: 'center', width: '65px' }}>2028</th>
+                  <th style={{ textAlign: 'center', width: '65px' }}>2029</th>
+                  <th style={{ textAlign: 'center', width: '65px' }}>2030</th>
+                  <th style={{ textAlign: 'center', width: '80px' }}>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -220,14 +220,14 @@ export default function Rank({ onSelectKecamatan }) {
 
                   return (
                     <tr key={item.username || index} className={isTop3 ? `top-row top-row-${rankNum}` : ''}>
-                      {/* 1. NOMOR */}
+                      {/* Nomor */}
                       <td style={{ textAlign: 'center' }}>
                         <span className={`rank-badge-pill rank-${isTop3 ? rankNum : 'other'}`}>
-                          {isTop3 ? (rankNum === 1 ? '🥇 1' : rankNum === 2 ? '🥈 2' : '🥉 3') : rankNum}
+                          {rankNum}
                         </span>
                       </td>
 
-                      {/* 2. NAMA KWARAN */}
+                      {/* Nama Kwaran */}
                       <td>
                         <div className="user-info-cell">
                           <div className="user-fullname">{item.fullname || item.username}</div>
@@ -235,21 +235,21 @@ export default function Rank({ onSelectKecamatan }) {
                         </div>
                       </td>
 
-                      {/* 3. JUMLAH TOTAL TANAMAN */}
+                      {/* Total Tanaman */}
                       <td style={{ textAlign: 'center' }}>
                         <span className={`tree-count-pill ${total > 0 ? 'has-trees' : 'zero-trees'}`}>
                           {total > 0 ? `${total} pohon` : '0'}
                         </span>
                       </td>
 
-                      {/* 4. TANGGAL TERAKHIR & JUMLAH TANAMAN TANGGAL TERAKHIR */}
+                      {/* Tanggal Terakhir */}
                       <td style={{ textAlign: 'center' }}>
                         {item.last_planting_date ? (
                           <div className="last-date-cell">
-                            <span className="last-date-text">📅 {formatDate(item.last_planting_date)}</span>
+                            <span className="last-date-text">{formatDate(item.last_planting_date)}</span>
                             {item.count_last_date > 0 && (
                               <span className="last-date-count">
-                                (+{item.count_last_date} pohon)
+                                +{item.count_last_date} pohon
                               </span>
                             )}
                           </div>
@@ -258,7 +258,7 @@ export default function Rank({ onSelectKecamatan }) {
                         )}
                       </td>
 
-                      {/* 5-10. JUMLAH TANAMAN PERTAHUN 2025-2030 */}
+                      {/* Per tahun 2025-2030 */}
                       <td style={{ textAlign: 'center' }} className={Number(item.y2025) > 0 ? 'cell-has-year' : 'cell-zero'}>
                         {Number(item.y2025) || '-'}
                       </td>
@@ -278,7 +278,7 @@ export default function Rank({ onSelectKecamatan }) {
                         {Number(item.y2030) || '-'}
                       </td>
 
-                      {/* 11. AKSI */}
+                      {/* Aksi */}
                       <td style={{ textAlign: 'center' }}>
                         {onSelectKecamatan ? (
                           <button
@@ -287,7 +287,7 @@ export default function Rank({ onSelectKecamatan }) {
                             onClick={() => onSelectKecamatan(item.username)}
                             title={`Lihat sebaran ${item.fullname} di peta`}
                           >
-                            Peta 🗺️
+                            Peta
                           </button>
                         ) : (
                           '-'

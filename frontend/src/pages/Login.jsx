@@ -344,7 +344,7 @@ export default function Login({ onNavigateToHome }) {
                 className="btn-submit"
                 disabled={loading}
               >
-                {loading ? <span>Memproses...</span> : <span>MASUK DASHBOARD</span>}
+                {loading ? <span>Memproses...</span> : <span>MASUK</span>}
               </button>
 
               <div className="auth-switch-prompt">

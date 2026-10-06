@@ -677,7 +677,7 @@ export default function Home({ selectedKecamatanFromRank, user }) {
                     onChange={(e) => setSelectedSpeciesFilter(e.target.value)}
                     className="species-dropdown"
                   >
-                    <option value="ALL">Semua Varietas ({selectedKecamatan.treeCount})</option>
+                    <option value="ALL">Semua Varietas{/*  */}</option>
                     {availableSpeciesInKec.map((sp) => (
                       <option key={sp} value={sp}>
                         {sp}
@@ -792,6 +792,17 @@ export default function Home({ selectedKecamatanFromRank, user }) {
             <div className="floating-active-kec-pill">
               📍 Kec. {selectedKecamatan.name} • {selectedKecamatan.treeCount} Pohon
             </div>
+          )}
+
+          {user && (
+            <button
+              type="button"
+              className="floating-add-tree-btn"
+              onClick={() => setIsAddModalOpen(true)}
+              title="Tambah Titik Penanaman Pohon Baru"
+            >
+              <span>Tambah Pohon</span>
+            </button>
           )}
         </div>
 

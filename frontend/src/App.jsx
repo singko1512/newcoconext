@@ -102,9 +102,6 @@ function MainApp() {
             <span style={{ fontSize: '0.85rem', color: '#1f2937', fontWeight: 700 }}>
               {user ? user.name || user.username : ''}
             </span>
-            <span style={{ fontSize: '0.72rem', color: '#6b7280', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              {user ? (user.role === 'admin' ? '🛡️ Administrator' : '🏢 Kwarran/Pangkalan') : ''}
-            </span>
           </div>
 
           <button
