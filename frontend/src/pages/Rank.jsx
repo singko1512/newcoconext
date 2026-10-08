@@ -69,82 +69,159 @@ export default function Rank({ onSelectKecamatan }) {
           dengan rekapitulasi pertahun 2025–2030 serta catatan penanaman terakhir.
         </p>
       </div>
-      <br />
 
-      {/* Podium Top 3 Juara Penanam */}
+      {/* Podium Top 3 */}
       {!loading && top3.length >= 3 && (
         <div className="podium-section">
-          {/* Juara 2: Perak */}
-          <div className="podium-card podium-silver">
-            <div className="podium-champ-badge silver-badge">JUARA 2 • PERAK</div>
-            <div className="podium-medal">🥈 2</div>
-            <h3 className="podium-name">{top3[1].fullname || top3[1].username}</h3>
-            <p className="podium-org">{top3[1].org || 'Kwarran'}</p>
-            <div className="podium-count">
-              <span className="count-number">{top3[1].total_trees}</span>
-              <span className="count-label">Pohon</span>
+
+          {/* ── Juara 2 (Perak) ── */}
+          <div className="podium-slot podium-slot-2">
+            {/* Medali di atas card, luar card */}
+            <div className="above-card-medal above-card-silver">
+              <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="36" r="22" fill="#94a3b8" />
+                <circle cx="32" cy="36" r="17" fill="#cbd5e1" />
+                <circle cx="32" cy="36" r="12" fill="#94a3b8" />
+                <text x="32" y="41" textAnchor="middle" fill="#fff" fontSize="13" fontWeight="bold">2</text>
+                <rect x="26" y="8" width="12" height="14" rx="2" fill="#64748b" />
+                <path d="M22 14 L26 8 L38 8 L42 14 L38 16 L26 16 Z" fill="#94a3b8" />
+                <path d="M30 8 L34 8 L34 22 L32 24 L30 22 Z" fill="#475569" />
+              </svg>
             </div>
-            <div className="podium-detail">
-              Terakhir: {formatDate(top3[1].last_planting_date)}
+
+            <div className="podium-card podium-silver">
+              <div className="podium-champ-badge silver-badge">JUARA 2 • PERAK</div>
+              <h3 className="podium-name">{top3[1].fullname || top3[1].username}</h3>
+              <p className="podium-org">{top3[1].org || 'Kwarran'}</p>
+              <div className="podium-count">
+                <span className="count-number">{top3[1].total_trees}</span>
+                <span className="count-label">Pohon</span>
+              </div>
+              <div className="podium-detail">
+                Terakhir: {formatDate(top3[1].last_planting_date)}
+              </div>
+              {onSelectKecamatan && (
+                <button
+                  type="button"
+                  className="podium-btn"
+                  onClick={() => onSelectKecamatan(top3[1].username)}
+                >
+                  Lihat di Peta
+                </button>
+              )}
             </div>
-            {onSelectKecamatan && (
-              <button
-                type="button"
-                className="podium-btn"
-                onClick={() => onSelectKecamatan(top3[1].username)}
-              >
-                Lihat di Peta
-              </button>
-            )}
+
+            {/* Podium stage block */}
+            <div className="podium-stage podium-stage-2">
+              <span className="podium-stage-label">2</span>
+            </div>
           </div>
 
-          {/* Juara 1: Emas */}
-          <div className="podium-card podium-gold">
-            <div className="crown-badge gold-badge">👑 JUARA 1 • EMAS</div>
-            <div className="podium-medal">🥇 1</div>
-            <h3 className="podium-name">{top3[0].fullname || top3[0].username}</h3>
-            <p className="podium-org">{top3[0].org || 'Kwarran'}</p>
-            <div className="podium-count">
-              <span className="count-number">{top3[0].total_trees}</span>
-              <span className="count-label">Pohon Ditanam</span>
+          {/* ── Juara 1 (Emas) ── */}
+          <div className="podium-slot podium-slot-1">
+            {/* Piala di atas card juara 1, animasi meriah */}
+            <div className="above-card-trophy">
+              <div className="trophy-sparkles">
+                <span className="sparkle s1">✦</span>
+                <span className="sparkle s2">★</span>
+                <span className="sparkle s3">✦</span>
+                <span className="sparkle s4">★</span>
+                <span className="sparkle s5">✦</span>
+              </div>
+              <svg viewBox="0 0 80 80" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+                {/* Cup body */}
+                <path d="M22 10 L58 10 L52 44 Q50 54 40 58 Q30 54 28 44 Z" fill="#f59e0b" />
+                <path d="M22 10 L58 10 L52 44 Q50 54 40 58 Q30 54 28 44 Z" fill="url(#trophyGrad)" />
+                {/* Handles */}
+                <path d="M22 12 Q10 12 10 24 Q10 36 22 38" fill="none" stroke="#d97706" strokeWidth="4" strokeLinecap="round" />
+                <path d="M58 12 Q70 12 70 24 Q70 36 58 38" fill="none" stroke="#d97706" strokeWidth="4" strokeLinecap="round" />
+                {/* Stem */}
+                <rect x="34" y="58" width="12" height="10" rx="2" fill="#b45309" />
+                {/* Base */}
+                <rect x="26" y="68" width="28" height="6" rx="3" fill="#92400e" />
+                {/* Star on cup */}
+                <text x="40" y="38" textAnchor="middle" fill="#fffbeb" fontSize="18" fontWeight="bold">★</text>
+                {/* Shine */}
+                <path d="M28 16 Q32 12 36 16" fill="none" stroke="#fef3c7" strokeWidth="2.5" strokeLinecap="round" opacity="0.8" />
+                <defs>
+                  <linearGradient id="trophyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#fbbf24" />
+                    <stop offset="50%" stopColor="#f59e0b" />
+                    <stop offset="100%" stopColor="#d97706" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
-            <div className="podium-detail">
-              Terakhir: {formatDate(top3[0].last_planting_date)}
+
+            <div className="podium-card podium-gold">
+              <div className="crown-badge gold-badge">👑 JUARA 1 • EMAS</div>
+              <h3 className="podium-name">{top3[0].fullname || top3[0].username}</h3>
+              <p className="podium-org">{top3[0].org || 'Kwarran'}</p>
+              <div className="podium-count">
+                <span className="count-number">{top3[0].total_trees}</span>
+                <span className="count-label">Pohon Ditanam</span>
+              </div>
+              <div className="podium-detail">
+                Terakhir: {formatDate(top3[0].last_planting_date)}
+              </div>
+              {onSelectKecamatan && (
+                <button
+                  type="button"
+                  className="podium-btn"
+                  onClick={() => onSelectKecamatan(top3[0].username)}
+                >
+                  Lihat di Peta
+                </button>
+              )}
             </div>
-            {onSelectKecamatan && (
-              <button
-                type="button"
-                className="podium-btn"
-                onClick={() => onSelectKecamatan(top3[0].username)}
-              >
-                Lihat di Peta
-              </button>
-            )}
+
+            <div className="podium-stage podium-stage-1">
+              <span className="podium-stage-label">1</span>
+            </div>
           </div>
 
-          {/* Juara 3: Perunggu */}
-          <div className="podium-card podium-bronze">
-            <div className="podium-champ-badge bronze-badge">JUARA 3 • PERUNGGU</div>
-            <div className="podium-medal">🥉 3</div>
-            <h3 className="podium-name">{top3[2].fullname || top3[2].username}</h3>
-            <p className="podium-org">{top3[2].org || 'Kwarran'}</p>
-            <div className="podium-count">
-              <span className="count-number">{top3[2].total_trees}</span>
-              <span className="count-label">Pohon</span>
+          {/* ── Juara 3 (Perunggu) ── */}
+          <div className="podium-slot podium-slot-3">
+            {/* Medali di atas card juara 3 */}
+            <div className="above-card-medal above-card-bronze">
+              <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="36" r="22" fill="#c2410c" />
+                <circle cx="32" cy="36" r="17" fill="#ea580c" />
+                <circle cx="32" cy="36" r="12" fill="#c2410c" />
+                <text x="32" y="41" textAnchor="middle" fill="#fff" fontSize="13" fontWeight="bold">3</text>
+                <rect x="26" y="8" width="12" height="14" rx="2" fill="#9a3412" />
+                <path d="M22 14 L26 8 L38 8 L42 14 L38 16 L26 16 Z" fill="#c2410c" />
+                <path d="M30 8 L34 8 L34 22 L32 24 L30 22 Z" fill="#7c2d12" />
+              </svg>
             </div>
-            <div className="podium-detail">
-              Terakhir: {formatDate(top3[2].last_planting_date)}
+
+            <div className="podium-card podium-bronze">
+              <div className="podium-champ-badge bronze-badge">JUARA 3 • PERUNGGU</div>
+              <h3 className="podium-name">{top3[2].fullname || top3[2].username}</h3>
+              <p className="podium-org">{top3[2].org || 'Kwarran'}</p>
+              <div className="podium-count">
+                <span className="count-number">{top3[2].total_trees}</span>
+                <span className="count-label">Pohon</span>
+              </div>
+              <div className="podium-detail">
+                Terakhir: {formatDate(top3[2].last_planting_date)}
+              </div>
+              {onSelectKecamatan && (
+                <button
+                  type="button"
+                  className="podium-btn"
+                  onClick={() => onSelectKecamatan(top3[2].username)}
+                >
+                  Lihat di Peta
+                </button>
+              )}
             </div>
-            {onSelectKecamatan && (
-              <button
-                type="button"
-                className="podium-btn"
-                onClick={() => onSelectKecamatan(top3[2].username)}
-              >
-                Lihat di Peta
-              </button>
-            )}
+
+            <div className="podium-stage podium-stage-3">
+              <span className="podium-stage-label">3</span>
+            </div>
           </div>
+
         </div>
       )}
 

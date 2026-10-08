@@ -176,10 +176,6 @@ export default function Articles() {
     <div className="articles-page-container">
       {/* Header */}
       <div className="articles-header">
-        <div className="articles-badge-row">
-          <span className="articles-badge">KABAR & EDUKASI</span>
-          <span className="api-status-badge">📡 {apiSourceStatus}</span>
-        </div>
         <h1 className="articles-title">Artikel & Kabar Penanaman</h1>
         <p className="articles-subtitle">
           Informasi terkini seputar kegiatan kepramukaan, konservasi alam, dan aksi penghijauan pohon kelapa di Kabupaten Bogor.
