@@ -837,6 +837,20 @@ export default function Home({ selectedKecamatanFromRank, user }) {
                 </span>
               </div>
 
+              {/* Foto Dokumentasi Pohon */}
+              {(activeTreeDetail.foto_sebelum || activeTreeDetail.foto_sesudah) && (
+                <div style={{ marginBottom: '1rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0', background: '#f8fafc' }}>
+                  <img
+                    src={activeTreeDetail.foto_sebelum || activeTreeDetail.foto_sesudah}
+                    alt={activeTreeDetail.nama_lokal}
+                    style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', display: 'block' }}
+                  />
+                  <div style={{ padding: '0.4rem 0.75rem', fontSize: '0.72rem', color: '#64748b', textAlign: 'center' }}>
+                    📸 Foto Dokumentasi Penanaman
+                  </div>
+                </div>
+              )}
+
               <div className="detail-grid">
                 <div className="detail-row">
                   <span className="detail-lbl">Kwarran / Penanam:</span>

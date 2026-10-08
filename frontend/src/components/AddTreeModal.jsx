@@ -11,6 +11,13 @@ export default function AddTreeModal({ isOpen, onClose, onTreeAdded, defaultPlan
   const [asalBibit, setAsalBibit] = useState('Swadaya / Beli Sendiri');
   const [penanam, setPenanam] = useState(defaultPlanter || 'kwarran.cibinong');
   const [cerita, setCerita] = useState('');
+
+  // Foto state & validasi max 2 MB
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [photoBase64, setPhotoBase64] = useState('');
+  const [photoFileName, setPhotoFileName] = useState('');
+  const [photoFileSize, setPhotoFileSize] = useState('');
+
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -27,6 +34,45 @@ export default function AddTreeModal({ isOpen, onClose, onTreeAdded, defaultPlan
     else if (val === 'Durian') setNamaLatin('Durio zibethinus');
     else if (val === 'Alpukat') setNamaLatin('Persea americana');
     else setNamaLatin('-');
+  };
+
+  // Handler Upload Foto dengan Validasi Maksimal 2 MB
+  const handlePhotoChange = (e) => {
+    setErrorMsg('');
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Batas 2 MB (2 * 1024 * 1024 bytes)
+    const MAX_SIZE_BYTES = 2 * 1024 * 1024;
+    if (file.size > MAX_SIZE_BYTES) {
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      setErrorMsg(`⚠️ Ukuran foto melebihi batas maksimal 2 MB (${sizeMB} MB). Silakan pilih foto lain yang ukurannya di bawah 2 MB.`);
+      e.target.value = '';
+      return;
+    }
+
+    // Format info ukuran
+    const formattedSize = file.size > 1024 * 1024
+      ? `${(file.size / (1024 * 1024)).toFixed(2)} MB`
+      : `${(file.size / 1024).toFixed(0)} KB`;
+
+    setPhotoFileName(file.name);
+    setPhotoFileSize(formattedSize);
+
+    // Convert to Base64 untuk preview dan disimpan
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setPhotoPreview(event.target.result);
+      setPhotoBase64(event.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemovePhoto = () => {
+    setPhotoPreview(null);
+    setPhotoBase64('');
+    setPhotoFileName('');
+    setPhotoFileSize('');
   };
 
   const handleSubmit = async (e) => {
@@ -57,7 +103,9 @@ export default function AddTreeModal({ isOpen, onClose, onTreeAdded, defaultPlan
         asal_bibit: asalBibit,
         penanam: penanam || defaultPlanter || 'Kwarcab Bogor',
         cerita,
-        status: '',
+        foto_sebelum: photoBase64 || null,
+        foto_sesudah: photoBase64 || null,
+        status: 'alive',
       };
 
       const res = await api.post('/trees', payload);
@@ -84,12 +132,12 @@ export default function AddTreeModal({ isOpen, onClose, onTreeAdded, defaultPlan
         {/* Header Modal */}
         <div style={headerStyle}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <span style={{ fontSize: '1.4rem' }}>🌴</span>
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#2b1d16', fontWeight: 800 }}>
+            <span style={{ fontSize: '1.3rem' }}>🌴</span>
+            <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#1e293b', fontWeight: 600 }}>
               Tambah Penanaman Pohon Baru
             </h3>
           </div>
-          <button onClick={onClose} style={closeBtnStyle} type="button">
+          <button onClick={onClose} style={closeBtnStyle} type="button" aria-label="Tutup modal">
             ✕
           </button>
         </div>
@@ -210,6 +258,65 @@ export default function AddTreeModal({ isOpen, onClose, onTreeAdded, defaultPlan
             </div>
           </div>
 
+          {/* Tambah Foto (Maksimal 2 MB) */}
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+              <label style={labelStyle}>Tambah Foto Pohon</label>
+              <span style={{ fontSize: '0.72rem', color: '#64748b' }}>Maksimal 2 MB</span>
+            </div>
+
+            {!photoPreview ? (
+              <label style={uploadAreaStyle}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoChange}
+                  style={{ display: 'none' }}
+                />
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span style={{ fontSize: '0.82rem', color: '#475569', marginTop: '0.35rem' }}>
+                  Pilih foto dari perangkat (JPG, PNG - Max 2MB)
+                </span>
+              </label>
+            ) : (
+              <div style={photoPreviewCardStyle}>
+                <img
+                  src={photoPreview}
+                  alt="Preview Tanaman"
+                  style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px' }}
+                />
+                <div style={{ flex: 1, overflow: 'hidden' }}>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 500, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {photoFileName || 'Foto Dokumentasi'}
+                  </div>
+                  <div style={{ fontSize: '0.74rem', color: '#64748b', marginTop: '2px' }}>
+                    Ukuran: <strong style={{ color: '#166534', fontWeight: 500 }}>{photoFileSize}</strong> / 2 MB maks
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleRemovePhoto}
+                    style={{
+                      marginTop: '6px',
+                      padding: '3px 8px',
+                      background: '#fee2e2',
+                      border: 'none',
+                      borderRadius: '4px',
+                      color: '#991b1b',
+                      fontSize: '0.72rem',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Hapus Foto
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Cerita */}
           <div style={{ marginBottom: '1.25rem' }}>
             <label style={labelStyle}>Catatan / Narasi Penanaman</label>
@@ -227,32 +334,18 @@ export default function AddTreeModal({ isOpen, onClose, onTreeAdded, defaultPlan
             <button
               type="button"
               onClick={onClose}
-              style={{
-                padding: '0.65rem 1.25rem',
-                background: '#f3f4f6',
-                border: 'none',
-                borderRadius: '8px',
-                color: '#4b5563',
-                fontWeight: 700,
-                cursor: 'pointer',
-              }}
+              style={btnCancelStyle}
+              onMouseEnter={(e) => { e.currentTarget.style.background = '#e2e8f0'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = '#f1f5f9'; }}
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={loading}
-              style={{
-                padding: '0.65rem 1.5rem',
-                background: '#92400e',
-                border: 'none',
-                borderRadius: '8px',
-                color: '#ffffff',
-                fontWeight: 800,
-                cursor: loading ? 'not-allowed' : 'pointer',
-                boxShadow: '0 2px 6px rgba(146, 64, 14, 0.35)',
-                transition: 'all 0.2s ease',
-              }}
+              style={btnSubmitStyle}
+              onMouseEnter={(e) => { e.currentTarget.style.background = '#5c2709'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = '#92400e'; }}
             >
               {loading ? 'Menyimpan...' : '🌱 Simpan ke Database'}
             </button>
@@ -269,7 +362,7 @@ const backdropStyle = {
   left: 0,
   right: 0,
   bottom: 0,
-  background: 'rgba(0, 0, 0, 0.6)',
+  background: 'rgba(0, 0, 0, 0.65)',
   backdropFilter: 'blur(4px)',
   zIndex: 9999,
   display: 'flex',
@@ -284,7 +377,7 @@ const modalStyle = {
   width: '100%',
   maxWidth: '560px',
   padding: '1.75rem',
-  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
+  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.25)',
   maxHeight: '90vh',
   overflowY: 'auto',
 };
@@ -294,7 +387,7 @@ const headerStyle = {
   justifyContent: 'space-between',
   alignItems: 'center',
   marginBottom: '1.25rem',
-  borderBottom: '1px solid #f3f4f6',
+  borderBottom: '1px solid #e2e8f0',
   paddingBottom: '0.75rem',
 };
 
@@ -303,14 +396,14 @@ const closeBtnStyle = {
   border: 'none',
   fontSize: '1.2rem',
   cursor: 'pointer',
-  color: '#9ca3af',
+  color: '#64748b',
 };
 
 const labelStyle = {
   display: 'block',
-  fontSize: '0.8rem',
-  fontWeight: 700,
-  color: '#374151',
+  fontSize: '0.78rem',
+  fontWeight: 500,
+  color: '#334155',
   marginBottom: '0.35rem',
 };
 
@@ -319,8 +412,59 @@ const inputStyle = {
   boxSizing: 'border-box',
   padding: '0.55rem 0.8rem',
   borderRadius: '8px',
-  border: '1px solid #d1d5db',
+  border: '1.5px solid #cbd5e1',
   fontSize: '0.88rem',
   outline: 'none',
   fontFamily: 'inherit',
+  fontWeight: 400,
+  color: '#1e293b',
 };
+
+const uploadAreaStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '1.1rem',
+  border: '1.5px dashed #cbd5e1',
+  borderRadius: '10px',
+  background: '#f8fafc',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+};
+
+const photoPreviewCardStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.85rem',
+  padding: '0.65rem',
+  border: '1px solid #e2e8f0',
+  borderRadius: '10px',
+  background: '#f8fafc',
+};
+
+const btnCancelStyle = {
+  padding: '0.6rem 1.2rem',
+  background: '#f1f5f9',
+  border: 'none',
+  borderRadius: '8px',
+  color: '#475569',
+  fontWeight: 500,
+  fontSize: '0.85rem',
+  cursor: 'pointer',
+  transition: 'background 0.2s ease',
+};
+
+const btnSubmitStyle = {
+  padding: '0.6rem 1.4rem',
+  background: '#92400e',
+  border: 'none',
+  borderRadius: '8px',
+  color: '#ffffff',
+  fontWeight: 500,
+  fontSize: '0.85rem',
+  cursor: 'pointer',
+  boxShadow: '0 2px 6px rgba(146, 64, 14, 0.35)',
+  transition: 'background 0.2s ease',
+};
+

@@ -191,4 +191,100 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+/**
+ * POST /api/trees
+ * Tambah titik penanaman pohon baru
+ */
+router.post('/', async (req, res) => {
+  const {
+    lat,
+    lng,
+    nama_lokal,
+    nama_latin,
+    tinggi_cm,
+    tanggal_tanam,
+    asal_bibit,
+    penanam,
+    cerita,
+    foto_sebelum,
+    foto_sesudah,
+    status = 'alive',
+  } = req.body;
+
+  if (!lat || !lng || !nama_lokal) {
+    return res.status(400).json({
+      success: false,
+      message: 'Koordinat (lat, lng) dan nama tanaman wajib diisi.',
+    });
+  }
+
+  try {
+    const dateStr = tanggal_tanam ? tanggal_tanam.replace(/[^0-9]/g, '').slice(0, 8) : new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const randomSuffix = Math.floor(100000 + Math.random() * 900000);
+    const serial_no = `KH-${dateStr}-${randomSuffix}`;
+
+    const [result] = await pool.query(
+      `INSERT INTO trees 
+        (lat, lng, nama_lokal, nama_latin, tinggi_cm, tanggal_tanam, jam_tanam, asal_bibit, penanam, cerita, foto_sebelum, foto_sesudah, serial_no, status)
+       VALUES (?, ?, ?, ?, ?, ?, '08:00:00', ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        parseFloat(lat),
+        parseFloat(lng),
+        nama_lokal,
+        nama_latin || '-',
+        Number(tinggi_cm) || 50,
+        tanggal_tanam || new Date().toISOString().slice(0, 10),
+        asal_bibit || 'Swadaya / Beli Sendiri',
+        penanam || 'Kwarcab Bogor',
+        cerita || '',
+        foto_sebelum || null,
+        foto_sesudah || null,
+        serial_no,
+        status || 'alive',
+      ]
+    );
+
+    res.status(201).json({
+      success: true,
+      message: 'Berhasil menambahkan data penanaman pohon',
+      data: {
+        id: result.insertId,
+        serial_no,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Gagal menambahkan pohon ke database',
+      error: error.message,
+    });
+  }
+});
+
+/**
+ * DELETE /api/trees/:id
+ * Hapus data penanaman pohon (Khusus Admin / Master)
+ */
+router.delete('/:id', async (req, res) => {
+  try {
+    const [result] = await pool.query('DELETE FROM trees WHERE id = ?', [req.params.id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Data pohon tidak ditemukan',
+      });
+    }
+    res.json({
+      success: true,
+      message: 'Data pohon berhasil dihapus',
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Gagal menghapus data pohon',
+      error: error.message,
+    });
+  }
+});
+
 export default router;

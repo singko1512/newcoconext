@@ -1,22 +1,46 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Rank from './pages/Rank';
 import Statistics from './pages/Statistics';
+import Articles from './pages/Articles';
+import MasterAdmin from './pages/MasterAdmin';
 import logoImg from './assets/logo.jpg';
 import './App.css';
-
-const NAV_ITEMS = [
-  { key: 'home', label: 'Peta' },
-  { key: 'rank', label: 'Peringkat Penanam' },
-  { key: 'statistics', label: 'Statistik Tanaman' },
-];
 
 function MainApp() {
   const { user, logout } = useAuth();
   const [currentPage, setCurrentPage] = useState('home');
   const [filterKecamatan, setFilterKecamatan] = useState('ALL');
+
+  // Cek apakah user adalah admin
+  const isAdmin = useMemo(() => {
+    if (!user) return false;
+    return (
+      user.role === 'admin' ||
+      user.is_admin === 1 ||
+      user.is_admin === true ||
+      (user.username || '').toLowerCase().includes('kwarcab') ||
+      (user.username || '').toLowerCase().includes('admin')
+    );
+  }, [user]);
+
+  // Daftar Menu Navigasi (Admin mendapatkan akses Data Master)
+  const navItems = useMemo(() => {
+    const items = [
+      { key: 'home', label: 'Peta' },
+      { key: 'rank', label: 'Peringkat Penanam' },
+      { key: 'statistics', label: 'Statistik Tanaman' },
+      { key: 'articles', label: 'Artikel Berita' },
+    ];
+
+    if (isAdmin) {
+      items.push({ key: 'master', label: 'Data Master' });
+    }
+
+    return items;
+  }, [isAdmin]);
 
   // Refs for sliding indicator
   const navRef = useRef(null);
@@ -41,7 +65,7 @@ function MainApp() {
     updateIndicator();
     window.addEventListener('resize', updateIndicator);
     return () => window.removeEventListener('resize', updateIndicator);
-  }, [updateIndicator]);
+  }, [updateIndicator, navItems]);
 
   // Navigasi dari halaman Rank ke Peta dengan memfilter kecamatan yang dipilih
   const handleSelectKecamatanFromRank = (kecKey) => {
@@ -55,7 +79,7 @@ function MainApp() {
   }
 
   return (
-    <div className="app-container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
+    <div className="app-container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f1f5f9' }}>
       {/* Top Header Navbar */}
       <header className="navbar">
         {/* Brand & Logo */}
@@ -86,7 +110,7 @@ function MainApp() {
               width: `${indicator.width}px`,
             }}
           />
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <button
               key={item.key}
               type="button"
@@ -102,9 +126,12 @@ function MainApp() {
         {/* User Info & Login / Logout */}
         <div className="navbar-actions">
           {user && (
-            <span className="navbar-user-name">
-              {user.name || user.username}
-            </span>
+            <div className="navbar-user-badge">
+              <span className="navbar-user-name">
+                {user.name || user.fullname || user.username}
+              </span>
+              {isAdmin && <span className="admin-tag-pill">Admin Master</span>}
+            </div>
           )}
           <button
             type="button"
@@ -116,7 +143,7 @@ function MainApp() {
           >
             {user ? (
               <>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
                   <polyline points="16 17 21 12 16 7" />
                   <line x1="21" y1="12" x2="9" y2="12" />
@@ -125,7 +152,7 @@ function MainApp() {
               </>
             ) : (
               <>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
                   <polyline points="10 17 15 12 10 7" />
                   <line x1="15" y1="12" x2="3" y2="12" />
@@ -149,6 +176,12 @@ function MainApp() {
           <Statistics onSelectSpecies={(sp) => {
             setCurrentPage('home');
           }} />
+        )}
+        {currentPage === 'articles' && (
+          <Articles />
+        )}
+        {currentPage === 'master' && isAdmin && (
+          <MasterAdmin onNavigateToHome={() => setCurrentPage('home')} />
         )}
       </main>
     </div>

@@ -29,11 +29,41 @@ router.get('/users', async (req, res) => {
 });
 
 /**
+ * GET /api/auth/current-location
+ * Mendeteksi titik koordinat dan nama kecamatan dari koneksi pengguna
+ */
+router.get('/current-location', async (req, res) => {
+  try {
+    const ipRes = await fetch('http://ip-api.com/json', { signal: AbortSignal.timeout(3000) });
+    const ipData = await ipRes.json();
+    if (ipData && ipData.status === 'success') {
+      return res.json({
+        success: true,
+        lat: ipData.lat,
+        lng: ipData.lon,
+        city: ipData.city,
+        isp: ipData.isp,
+      });
+    }
+  } catch (err) {
+    // ignore error fallback
+  }
+
+  // Fallback ke koordinat Cibinong (Pusat Kabupaten Bogor)
+  res.json({
+    success: true,
+    lat: -6.48167,
+    lng: 106.854,
+    city: 'Cibinong',
+  });
+});
+
+/**
  * POST /api/auth/login
  * Login dengan username/fullname dan password
  */
 router.post('/login', async (req, res) => {
-  const { username, identity, password } = req.body;
+  const { username, identity, password, locationKecamatan } = req.body;
   const userIdentifier = username || identity;
 
   if (!userIdentifier || !password) {
@@ -76,14 +106,21 @@ router.post('/login', async (req, res) => {
       });
     }
 
+    // Geofencing tidak mengunci akses (pilih identitas bebas untuk semua akun)
+
     // Buat JWT Token
+    const isKwarcabAdmin =
+      user.is_admin === 1 ||
+      (user.username || '').toLowerCase().includes('kwarcab') ||
+      (user.username || '').toLowerCase().includes('admin');
+
     const token = jwt.sign(
       {
         id: user.id,
         username: user.username,
         fullname: user.fullname,
         org: user.org,
-        is_admin: user.is_admin === 1,
+        is_admin: isKwarcabAdmin,
       },
       JWT_SECRET,
       { expiresIn: '7d' }
@@ -202,6 +239,29 @@ router.post('/register', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Gagal mendaftarkan akun baru',
+      error: error.message,
+    });
+  }
+});
+
+/**
+ * GET /api/auth/all-users
+ * Mendapatkan detail lengkap seluruh pengguna untuk Admin Data Master
+ */
+router.get('/all-users', async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT id, username, fullname, org, birthdate, whatsapp, is_admin, created_at FROM users ORDER BY is_admin DESC, fullname ASC'
+    );
+    res.json({
+      success: true,
+      count: rows.length,
+      data: rows,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Gagal mengambil data master pengguna',
       error: error.message,
     });
   }

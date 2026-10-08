@@ -33,7 +33,7 @@
 
 .rank-title {
   font-size: 1.75rem;
-  font-weight: 800;
+  font-weight: 600;
   color: #1e293b;
   margin: 0 0 0.4rem 0;
 }
@@ -58,97 +58,134 @@
 
 .podium-card {
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 1.5rem 1.25rem 1.35rem;
   text-align: center;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid #cbd5e1;
   position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   width: 260px;
 }
 
 .podium-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  border-color: #64748b;
 }
 
-/* Gold — center card */
+/* Gold — center card (Juara 1 Emas) */
 .podium-gold {
-  border-color: #CC6F00;
+  border-color: #d97706;
   border-width: 2px;
-  background: linear-gradient(180deg, #fffdf7 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%);
   order: 2;
-  width: 280px;
+  width: 285px;
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
-  box-shadow: 0 4px 20px rgba(204, 111, 0, 0.12);
+  box-shadow: 0 6px 24px rgba(217, 119, 6, 0.18);
 }
 
+.podium-gold:hover {
+  border-color: #b45309;
+  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+}
+
+/* Silver — card (Juara 2 Perak) */
 .podium-silver {
+  border-color: #94a3b8;
+  border-width: 2px;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
   order: 1;
+  box-shadow: 0 4px 18px rgba(100, 116, 139, 0.12);
 }
 
+.podium-silver:hover {
+  border-color: #64748b;
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+/* Bronze — card (Juara 3 Perunggu) */
 .podium-bronze {
+  border-color: #ea580c;
+  border-width: 2px;
+  background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%);
   order: 3;
+  box-shadow: 0 4px 18px rgba(234, 88, 12, 0.12);
 }
 
-/* Crown badge (gold only) */
-.crown-badge {
+.podium-bronze:hover {
+  border-color: #c2410c;
+  background: linear-gradient(180deg, #ffedd5 0%, #fed7aa 100%);
+}
+
+/* Champion badges */
+.crown-badge,
+.podium-champ-badge {
   position: absolute;
-  top: -11px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #CC6F00;
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 0.65rem;
-  padding: 0.22rem 0.75rem;
+  font-weight: 600;
+  font-size: 0.68rem;
+  padding: 0.25rem 0.85rem;
   border-radius: 9999px;
-  letter-spacing: 0.8px;
-  box-shadow: 0 2px 8px rgba(204, 111, 0, 0.35);
+  letter-spacing: 0.6px;
   white-space: nowrap;
+}
+
+.gold-badge {
+  background: #d97706;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
+}
+
+.silver-badge {
+  background: #475569;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(71, 85, 105, 0.35);
+}
+
+.bronze-badge {
+  background: #c2410c;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(194, 65, 12, 0.35);
 }
 
 /* Medal circle */
 .podium-medal {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 0.65rem;
-  font-size: 1rem;
-  font-weight: 900;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: #ffffff;
 }
 
 .podium-gold .podium-medal {
   width: 52px;
   height: 52px;
-  font-size: 1.15rem;
-  background: #CC6F00;
-  box-shadow: 0 3px 12px rgba(204, 111, 0, 0.3);
+  font-size: 1.25rem;
+  background: #d97706;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
 }
 
 .podium-silver .podium-medal {
   background: #64748b;
-  box-shadow: 0 3px 10px rgba(100, 116, 139, 0.25);
+  box-shadow: 0 4px 12px rgba(100, 116, 139, 0.3);
 }
 
 .podium-bronze .podium-medal {
-  background: #b45309;
-  box-shadow: 0 3px 10px rgba(180, 83, 9, 0.25);
-}
-
-/* Hide duplicate rank number */
-.podium-rank-number {
-  display: none;
+  background: #ea580c;
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
 }
 
 .podium-name {
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: 0.98rem;
+  font-weight: 600;
   color: #1e293b;
   margin: 0 0 0.15rem 0;
   line-height: 1.3;
@@ -156,9 +193,9 @@
 
 .podium-org {
   font-size: 0.74rem;
-  color: #94a3b8;
+  color: #64748b;
   margin: 0 0 0.85rem 0;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .podium-count {
@@ -166,21 +203,30 @@
 }
 
 .podium-count .count-number {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #CC6F00;
+  font-size: 1.85rem;
+  font-weight: 600;
+  color: #1e293b;
   display: block;
   line-height: 1;
 }
 
 .podium-gold .podium-count .count-number {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
+  color: #b45309;
+}
+
+.podium-silver .podium-count .count-number {
+  color: #334155;
+}
+
+.podium-bronze .podium-count .count-number {
+  color: #9a3412;
 }
 
 .podium-count .count-label {
   font-size: 0.72rem;
-  color: #94a3b8;
-  font-weight: 600;
+  color: #64748b;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -189,26 +235,26 @@
   font-size: 0.74rem;
   color: #64748b;
   margin-bottom: 1rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .podium-btn {
   background: #92400e;
   color: #ffffff;
   border: none;
-  padding: 0.42rem 1rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 0.78rem;
   transition: all 0.15s ease;
   box-shadow: 0 2px 6px rgba(146, 64, 14, 0.25);
 }
 
 .podium-btn:hover {
-  background: #78350f;
+  background: #5c2709;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(146, 64, 14, 0.3);
+  box-shadow: 0 4px 12px rgba(92, 39, 9, 0.4);
 }
 
 /* ─── CONTROLS ROW ─── */
@@ -334,46 +380,62 @@
 }
 
 .rank-table th {
-  background: #f8fafc;
-  color: #64748b;
-  font-weight: 700;
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 500;
   font-size: 0.72rem;
   letter-spacing: 0.5px;
   padding: 0.75rem 0.85rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1.5px solid #cbd5e1;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .rank-table td {
   padding: 0.7rem 0.85rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
   vertical-align: middle;
 }
 
 .rank-table tbody tr {
-  transition: background 0.12s ease;
+  transition: background 0.15s ease;
 }
 
+/* Hover di gelapkan secara nyata dan tegas */
 .rank-table tbody tr:hover {
-  background: #fefdfb;
+  background: #e2e8f0 !important;
 }
 
 .rank-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Top 3 row backgrounds */
+/* Warna bedain buat juara penanam di tabel */
 .top-row-1 {
-  background: #fffbf0;
+  background: #fef9c3 !important;
+  border-left: 4px solid #d97706 !important;
+}
+
+.top-row-1:hover {
+  background: #fef08a !important;
 }
 
 .top-row-2 {
-  background: #fafbfc;
+  background: #f1f5f9 !important;
+  border-left: 4px solid #94a3b8 !important;
+}
+
+.top-row-2:hover {
+  background: #e2e8f0 !important;
 }
 
 .top-row-3 {
-  background: #fffcf5;
+  background: #ffedd5 !important;
+  border-left: 4px solid #ea580c !important;
+}
+
+.top-row-3:hover {
+  background: #fed7aa !important;
 }
 
 /* Rank badge in table */
@@ -381,32 +443,35 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 0.75rem;
-  width: 30px;
-  height: 30px;
+  font-weight: 500;
+  font-size: 0.76rem;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
 }
 
 .rank-1 {
-  background: #CC6F00;
+  background: #d97706;
   color: #ffffff;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.35);
 }
 
 .rank-2 {
   background: #64748b;
   color: #ffffff;
+  box-shadow: 0 2px 6px rgba(100, 116, 139, 0.3);
 }
 
 .rank-3 {
-  background: #b45309;
+  background: #ea580c;
   color: #ffffff;
+  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.3);
 }
 
 .rank-other {
-  color: #94a3b8;
+  color: #64748b;
   background: transparent;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 /* User info cell */
@@ -416,14 +481,14 @@
 }
 
 .user-fullname {
-  font-weight: 700;
-  color: #1e293b;
+  font-weight: 500;
+  color: #0f172a;
   font-size: 0.86rem;
 }
 
 .user-sub {
   font-size: 0.72rem;
-  color: #94a3b8;
+  color: #64748b;
   margin-top: 1px;
 }
 
@@ -433,18 +498,18 @@
   padding: 0.25rem 0.65rem;
   border-radius: 9999px;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 500;
   white-space: nowrap;
 }
 
 .tree-count-pill.has-trees {
   background: #fef3c7;
-  color: #CC6F00;
+  color: #b45309;
   border: 1px solid #fde68a;
 }
 
 .tree-count-pill.zero-trees {
-  color: #cbd5e1;
+  color: #94a3b8;
   background: transparent;
 }
 
@@ -458,30 +523,30 @@
 
 .last-date-text {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 400;
   color: #475569;
 }
 
 .last-date-count {
   font-size: 0.7rem;
   color: #059669;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .text-muted {
-  color: #cbd5e1;
+  color: #94a3b8;
 }
 
 /* Year cells */
 .cell-has-year {
-  font-weight: 700;
+  font-weight: 500;
   color: #1e293b;
   font-size: 0.86rem;
 }
 
 .cell-has-year.active-year {
-  color: #CC6F00;
-  background: rgba(204, 111, 0, 0.06);
+  color: #b45309;
+  background: rgba(217, 119, 6, 0.08);
   border-radius: 4px;
 }
 
@@ -495,19 +560,19 @@
   background: #92400e;
   color: #ffffff;
   border: none;
-  padding: 0.32rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.74rem;
-  font-weight: 700;
+  font-size: 0.76rem;
+  font-weight: 500;
   transition: all 0.15s ease;
   white-space: nowrap;
 }
 
 .table-action-btn:hover {
-  background: #78350f;
+  background: #5c2709;
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(146, 64, 14, 0.25);
+  box-shadow: 0 2px 8px rgba(92, 39, 9, 0.35);
   transform: translateY(-1px);
 }
 

@@ -24,4 +24,40 @@ router.get('/', async (req, res) => {
   }
 });
 
+/**
+ * POST /api/species
+ * Tambah varietas / spesies baru (Khusus Admin Master)
+ */
+router.post('/', async (req, res) => {
+  const { nama_lokal, nama_latin, logo_path } = req.body;
+  if (!nama_lokal) {
+    return res.status(400).json({
+      success: false,
+      message: 'Nama lokal tanaman wajib diisi.',
+    });
+  }
+
+  try {
+    const [result] = await pool.query(
+      'INSERT INTO species (nama_lokal, nama_latin, logo_path) VALUES (?, ?, ?)',
+      [nama_lokal.trim(), nama_latin ? nama_latin.trim() : '-', logo_path || null]
+    );
+    res.status(201).json({
+      success: true,
+      message: 'Varietas berhasil ditambahkan ke master',
+      data: {
+        id: result.insertId,
+        nama_lokal,
+        nama_latin,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Gagal menambahkan spesies (mungkin nama sudah ada)',
+      error: error.message,
+    });
+  }
+});
+
 export default router;

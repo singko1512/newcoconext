@@ -71,13 +71,13 @@ export default function Rank({ onSelectKecamatan }) {
       </div>
       <br />
 
-      {/* Podium Top 3 */}
+      {/* Podium Top 3 Juara Penanam */}
       {!loading && top3.length >= 3 && (
         <div className="podium-section">
-          {/* 2nd Place */}
+          {/* Juara 2: Perak */}
           <div className="podium-card podium-silver">
-            <div className="podium-medal">2</div>
-            <div className="podium-rank-number">#2</div>
+            <div className="podium-champ-badge silver-badge">JUARA 2 • PERAK</div>
+            <div className="podium-medal">🥈 2</div>
             <h3 className="podium-name">{top3[1].fullname || top3[1].username}</h3>
             <p className="podium-org">{top3[1].org || 'Kwarran'}</p>
             <div className="podium-count">
@@ -98,11 +98,10 @@ export default function Rank({ onSelectKecamatan }) {
             )}
           </div>
 
-          {/* 1st Place */}
+          {/* Juara 1: Emas */}
           <div className="podium-card podium-gold">
-            <div className="crown-badge">PERINGKAT 1</div>
-            <div className="podium-medal">1</div>
-            <div className="podium-rank-number">#1</div>
+            <div className="crown-badge gold-badge">👑 JUARA 1 • EMAS</div>
+            <div className="podium-medal">🥇 1</div>
             <h3 className="podium-name">{top3[0].fullname || top3[0].username}</h3>
             <p className="podium-org">{top3[0].org || 'Kwarran'}</p>
             <div className="podium-count">
@@ -123,10 +122,10 @@ export default function Rank({ onSelectKecamatan }) {
             )}
           </div>
 
-          {/* 3rd Place */}
+          {/* Juara 3: Perunggu */}
           <div className="podium-card podium-bronze">
-            <div className="podium-medal">3</div>
-            <div className="podium-rank-number">#3</div>
+            <div className="podium-champ-badge bronze-badge">JUARA 3 • PERUNGGU</div>
+            <div className="podium-medal">🥉 3</div>
             <h3 className="podium-name">{top3[2].fullname || top3[2].username}</h3>
             <p className="podium-org">{top3[2].org || 'Kwarran'}</p>
             <div className="podium-count">
